@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conference Attendee Portal</title>
+    <style>
+        /* shadcn-inspired dark theme */
+        :root {
+            --background: 240 10% 3.9%;
+            --foreground: 210 20% 98%;
+            --card: 240 10% 10%;
+            --card-foreground: 210 20% 98%;
+            --border: 240 3.7% 15.9%;
+            --muted: 240 3.7% 15.9%;
+            --muted-foreground: 240 5% 64.9%;
+            --primary: 210 20% 98%;
+            --primary-foreground: 240 5.9% 10%;
+            --secondary: 240 3.7% 15.9%;
+            --secondary-foreground: 210 20% 98%;
+            --ring: 240 5% 64.9%;
+            --radius: 0.75rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+        }
+
+        #app {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            min-height: 100dvh;
+            background-color: hsl(var(--background));
+            position: relative;
+            overflow-x: hidden;
+            padding: 0 1rem 2rem;
+        }
+
+        /* ── Header ───────────────────── */
+        .app-header {
+            padding: 1.5rem 0.25rem 0.5rem;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: hsl(var(--background));
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .app-header .brand {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 0.25rem;
+        }
+        .app-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: hsl(var(--foreground));
+            line-height: 1.2;
+        }
+
+        /* ── Search Bar ───────────────── */
+        .search-wrap {
+            position: relative;
+            margin: 1.25rem 0 0.75rem;
+            z-index: 5;
+        }
+        .search-wrap input {
+            width: 100%;
+            padding: 0.875rem 2.75rem 0.875rem 3rem;
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            font-size: 0.9375rem;
+            font-family: inherit;
+            background-color: hsl(var(--card));
+            color: hsl(var(--foreground));
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+            outline: none;
+        }
+        .search-wrap input::placeholder {
+            color: hsl(var(--muted-foreground));
+            font-weight: 400;
+        }
+        .search-wrap input:focus {
+            border-color: hsl(var(--ring));
+            background-color: hsl(var(--secondary));
+            box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 0 0 3px hsla(var(--ring), 0.3);
+        }
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: hsl(var(--muted-foreground));
+            display: flex;
+            align-items: center;
+        }
+        .search-clear {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: hsl(var(--muted-foreground));
+            transition: all 0.2s ease;
+        }
+        .search-clear.visible {
+            display: flex;
+        }
+        .search-clear:hover {
+            background: hsla(var(--muted), 0.8);
+            color: hsl(var(--foreground));
+        }
+
+        /* Hide native clear button */
+        input[type="text"]::-webkit-search-cancel-button,
+        input[type="search"]::-webkit-search-cancel-button {
+            display: none;
+        }
+        input[type="text"]::-ms-clear,
+        input[type="search"]::-ms-clear {
+            display: none;
+        }
+
+        /* ── Icon Grid (shadcn outline style, 5 per row) ── */
+        .icon-grid-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: hsl(var(--muted-foreground));
+            margin: 1.25rem 0 0.75rem 0.25rem;
+        }
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .icon-grid .app-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            transition: transform 0.2s ease;
+        }
+        .icon-grid .app-icon:active {
+            transform: scale(0.94);
+        }
+        .icon-grid .app-icon .icon-square {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            max-width: 3.25rem;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid hsl(var(--border));
+            background-color: transparent;
+            box-shadow: none;
+            transition: all 0.2s ease;
+        }
+        .icon-grid .app-icon:active .icon-square {
+            background-color: hsl(var(--muted));
+            border-color: hsl(var(--ring));
+        }
+        .icon-grid .app-icon .icon-square svg {
+            stroke: hsl(var(--muted-foreground));
+            fill: none;
+        }
+        .icon-grid .app-icon .icon-label {
+            font-size: 0.625rem;
+            font-weight: 500;
+            color: hsl(var(--muted-foreground));
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            max-width: 4rem;
+        }
+
+        /* ── Attendee List ────────────── */
+        .attendee-section-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: hsl(var(--muted-foreground));
+            margin: 1.25rem 0 0.75rem 0.25rem;
+            display: none;
+        }
+        .attendee-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .attendee-card {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 0.875rem 1rem;
+            background-color: hsl(var(--card));
+            border-radius: var(--radius);
+            border: 1px solid hsl(var(--border));
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .attendee-card:hover {
+            background-color: hsl(var(--secondary));
+            border-color: hsl(var(--ring));
+        }
+        .attendee-card:active {
+            transform: scale(0.985);
+            background-color: hsl(var(--muted));
+        }
+        .attendee-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: hsl(var(--primary-foreground));
+            flex-shrink: 0;
+            background-color: hsl(var(--primary));
+        }
+        .attendee-avatar.male {
+            background-color: hsl(217 91% 60%);
+        }
+        .attendee-avatar.female {
+            background-color: hsl(340 82% 65%);
+        }
+        .attendee-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .attendee-name {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: hsl(var(--foreground));
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+        }
+        .attendee-branch-preview {
+            font-size: 0.75rem;
+            color: hsl(var(--muted-foreground));
+            font-weight: 400;
+        }
+        .attendee-chevron {
+            flex-shrink: 0;
+            color: hsl(var(--muted-foreground));
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+        .attendee-card:active .attendee-chevron {
+            transform: translateX(3px);
+            color: hsl(var(--foreground));
+        }
+
+        /* ── No Results ──────────────── */
+        .no-results {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: hsl(var(--muted-foreground));
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: none;
+        }
+        .no-results.visible {
+            display: block;
+        }
+        .no-results svg {
+            display: block;
+            margin: 0 auto 0.75rem;
+            opacity: 0.5;
+        }
+
+        /* ── Detail View ─────────────── */
+        #detail-view {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background-color: hsl(var(--background));
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 0 1rem 2.5rem;
+            animation: fadeSlideIn 0.25s ease;
+        }
+        #detail-view.active {
+            display: flex;
+        }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 0 0.75rem;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            background-color: hsl(var(--background));
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .back-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            border: 1px solid hsl(var(--border));
+            background-color: hsl(var(--card));
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: hsl(var(--foreground));
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+        .back-btn:hover {
+            background-color: hsl(var(--secondary));
+            border-color: hsl(var(--ring));
+        }
+        .back-btn:active {
+            transform: scale(0.94);
+        }
+        .detail-header-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: hsl(var(--foreground));
+            letter-spacing: -0.02em;
+        }
+
+        /* ── Detail Card ─────────────── */
+        .detail-card {
+            background-color: hsl(var(--card));
+            border-radius: var(--radius);
+            border: 1px solid hsl(var(--border));
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            padding: 1.25rem 1.125rem;
+            margin-top: 0.5rem;
+        }
+        .detail-avatar-row {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid hsl(var(--border));
+        }
+        .detail-avatar-large {
+            width: 3.25rem;
+            height: 3.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: hsl(var(--primary-foreground));
+            background-color: hsl(var(--primary));
+            flex-shrink: 0;
+        }
+        .detail-avatar-large.male {
+            background-color: hsl(217 91% 60%);
+        }
+        .detail-avatar-large.female {
+            background-color: hsl(340 82% 65%);
+        }
+        .detail-name-large {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: hsl(var(--foreground));
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+        }
+        .detail-name-sub {
+            font-size: 0.75rem;
+            color: hsl(var(--muted-foreground));
+            font-weight: 400;
+        }
+        .detail-info-row {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 0.875rem 0;
+            border-bottom: 1px solid hsl(var(--border));
+        }
+        .detail-info-row:last-child {
+            border-bottom: none;
+        }
+        .detail-info-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background-color: hsl(var(--muted));
+            color: hsl(var(--muted-foreground));
+        }
+        .detail-info-icon svg {
+            stroke: currentColor;
+            fill: none;
+        }
+        .detail-info-text {
+            flex: 1;
+            min-width: 0;
+        }
+        .detail-info-label {
+            font-size: 0.625rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 0.125rem;
+        }
+        .detail-info-value {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: hsl(var(--foreground));
+            letter-spacing: -0.01em;
+            word-break: break-word;
+        }
+
+        /* ── Toast ───────────────────── */
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: hsl(var(--secondary));
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.8125rem;
+            z-index: 200;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+            letter-spacing: -0.01em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            white-space: nowrap;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ── Responsive adjustments ─── */
+        @media (min-width: 481px) {
+            #app {
+                padding: 0 1.5rem 2.5rem;
+            }
+            .icon-grid {
+                gap: 0.75rem;
+            }
+        }
+        @media (min-width: 768px) {
+            body {
+                align-items: center;
+                padding: 1.5rem 0;
+            }
+            #app {
+                border-radius: 1.5rem;
+                min-height: auto;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+                padding-bottom: 2rem;
+            }
+            #detail-view {
+                max-width: 480px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 1.5rem;
+                min-height: auto;
+                bottom: auto;
+                max-height: 90vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- ── Home View ────────────── -->
+        <div id="home-view">
+            <header class="app-header">
+                <div class="brand">RLTC LUZON ZONE 2026</div>
+                <h1>Attendee Portal</h1>
+            </header>
+
+            <!-- Search Bar -->
+            <div class="search-wrap">
+                <span class="search-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </span>
+                <input type="text" id="searchInput" placeholder="Search your name…" autocomplete="off" enterkeyhint="search">
+                <button class="search-clear" id="searchClear" aria-label="Clear search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Outline icon grid, 5 per row -->
+            <div class="icon-grid-label">Quick Access</div>
+            <div class="icon-grid">
+                <div class="app-icon" data-toast="Schedule — Coming soon">
+                    <div class="icon-square">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                            <rect x="7" y="13" width="3" height="3" rx="0.5"/><rect x="14" y="13" width="3" height="3" rx="0.5"/>
+                        </svg>
+                    </div>
+                    <span class="icon-label">Schedule</span>
+                </div>
+                <div class="app-icon" data-toast="Speakers — Coming soon">
+                    <div class="icon-square">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="7" r="4"/>
+                            <path d="M5 21c0-4 3.1-7 7-7s7 3 7 7"/>
+                            <rect x="16" y="12" width="6" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                            <line x1="19" y1="8" x2="19" y2="11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span class="icon-label">Speakers</span>
+                </div>
+                <div class="app-icon" data-toast="Evaluation — Coming soon">
+                    <div class="icon-square">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="2" width="16" height="20" rx="2"/>
+                            <line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/>
+                            <line x1="8" y1="15" x2="12" y2="15"/>
+                            <polyline points="16,14 18,16 22,12" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                    <span class="icon-label">Evaluation</span>
+                </div>
+                <div class="app-icon" data-toast="Errand Request — Coming soon">
+                    <div class="icon-square">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="5" width="18" height="14" rx="2"/>
+                            <polyline points="3,7 12,13 21,7"/>
+                        </svg>
+                    </div>
+                    <span class="icon-label">Errand<br>Request</span>
+                </div>
+                <div class="app-icon" data-toast="Conference Resources — Coming soon">
+                    <div class="icon-square">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 6l4-4h10l6 6v14a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
+                            <line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/>
+                            <line x1="8" y1="18" x2="12" y2="18"/>
+                        </svg>
+                    </div>
+                    <span class="icon-label">Resources</span>
+                </div>
+            </div>
+
+            <!-- Attendee List (hidden until search) -->
+            <div class="attendee-section-label" id="attendeeLabel">Attendees</div>
+            <div class="attendee-list" id="attendeeList"></div>
+            <div class="no-results" id="noResults">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    <line x1="8" y1="11" x2="14" y2="11"/>
+                </svg>
+                No attendees found
+            </div>
+        </div>
+
+        <!-- ── Detail View ────────────── -->
+        <div id="detail-view">
+            <div class="detail-header">
+                <button class="back-btn" id="backBtn" aria-label="Go back">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15,18 9,12 15,6"/>
+                    </svg>
+                </button>
+                <span class="detail-header-title">Attendee Info</span>
+            </div>
+            <div class="detail-card" id="detailCard">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script>
+        (function() {
+            const attendees = [
+                { id: 1, name: 'Yuen Y Yalung', gender: 'male', branch: 'Main Office', room: '201',
+                    tracks: 'Web Development, AI & ML', bus: 'Bus 3' },
+                { id: 2, name: 'Jose Lorenzo Cunanan', gender: 'male', branch: 'North Branch', room: '305',
+                    tracks: 'Cloud Computing, DevOps', bus: 'Bus 1' },
+                { id: 3, name: 'Exequil Saylon', gender: 'male', branch: 'South Branch', room: '412',
+                    tracks: 'Data Science, Cybersecurity', bus: 'Bus 2' },
+                { id: 4, name: 'Charlene G Yalung', gender: 'female', branch: 'Main Office', room: '208',
+                    tracks: 'UI/UX Design, Web Development', bus: 'Bus 1' },
+                { id: 5, name: 'Kathy Rose Santos', gender: 'female', branch: 'East Branch', room: '315',
+                    tracks: 'AI & ML, Data Science', bus: 'Bus 3' },
+                { id: 6, name: 'Princess Sarah Masabio', gender: 'female', branch: 'North Branch', room: '502',
+                    tracks: 'Cloud Computing, Cybersecurity', bus: 'Bus 2' },
+            ];
+
+            const searchInput = document.getElementById('searchInput');
+            const searchClear = document.getElementById('searchClear');
+            const attendeeList = document.getElementById('attendeeList');
+            const noResults = document.getElementById('noResults');
+            const attendeeLabel = document.getElementById('attendeeLabel');
+            const detailView = document.getElementById('detail-view');
+            const detailCard = document.getElementById('detailCard');
+            const backBtn = document.getElementById('backBtn');
+            const toast = document.getElementById('toast');
+            const appIcons = document.querySelectorAll('.app-icon[data-toast]');
+
+            let toastTimer = null;
+
+            function showToast(message) {
+                if (toastTimer) clearTimeout(toastTimer);
+                toast.textContent = message;
+                toast.classList.add('show');
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                    toastTimer = null;
+                }, 1800);
+            }
+
+            appIcons.forEach(icon => {
+                icon.addEventListener('click', () => {
+                    showToast(icon.getAttribute('data-toast'));
+                });
+            });
+
+            function renderAttendeeList(filterText = '') {
+                const query = filterText.trim().toLowerCase();
+                if (query === '') {
+                    attendeeList.innerHTML = '';
+                    noResults.classList.remove('visible');
+                    attendeeLabel.style.display = 'none';
+                    return;
+                }
+                attendeeLabel.style.display = 'block';
+                const filtered = attendees.filter(a => a.name.toLowerCase().includes(query));
+                attendeeList.innerHTML = '';
+                if (filtered.length === 0) {
+                    noResults.classList.add('visible');
+                } else {
+                    noResults.classList.remove('visible');
+                    filtered.forEach(att => {
+                        const card = document.createElement('div');
+                        card.className = 'attendee-card';
+                        card.setAttribute('data-id', att.id);
+                        card.setAttribute('role', 'button');
+                        card.setAttribute('tabindex', '0');
+                        card.setAttribute('aria-label', `View details for ${att.name}`);
+                        const initial = att.name.charAt(0);
+                        const avatarClass = att.gender === 'male' ? 'male' : 'female';
+                        card.innerHTML = `
+                            <div class="attendee-avatar ${avatarClass}">${initial}</div>
+                            <div class="attendee-info">
+                                <div class="attendee-name">${escapeHTML(att.name)}</div>
+                                <div class="attendee-branch-preview">${escapeHTML(att.branch)}</div>
+                            </div>
+                            <div class="attendee-chevron">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9,18 15,12 9,6"/>
+                                </svg>
+                            </div>
+                        `;
+                        card.addEventListener('click', () => openDetail(att));
+                        card.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                openDetail(att);
+                            }
+                        });
+                        attendeeList.appendChild(card);
+                    });
+                }
+            }
+
+            function escapeHTML(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function openDetail(att) {
+                const initial = att.name.charAt(0);
+                const avatarClass = att.gender === 'male' ? 'male' : 'female';
+                detailCard.innerHTML = `
+                    <div class="detail-avatar-row">
+                        <div class="detail-avatar-large ${avatarClass}">${initial}</div>
+                        <div>
+                            <div class="detail-name-large">${escapeHTML(att.name)}</div>
+                            <div class="detail-name-sub">Conference Attendee</div>
+                        </div>
+                    </div>
+                    <div class="detail-info-row">
+                        <div class="detail-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="4"/>
+                                <path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+                            </svg>
+                        </div>
+                        <div class="detail-info-text">
+                            <div class="detail-info-label">Full Name</div>
+                            <div class="detail-info-value">${escapeHTML(att.name)}</div>
+                        </div>
+                    </div>
+                    <div class="detail-info-row">
+                        <div class="detail-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="7" width="7" height="14" rx="1"/>
+                                <rect x="14" y="3" width="7" height="18" rx="1"/>
+                                <line x1="6.5" y1="10" x2="6.5" y2="10.01" stroke-width="2.5"/>
+                                <line x1="17.5" y1="7" x2="17.5" y2="7.01" stroke-width="2.5"/>
+                            </svg>
+                        </div>
+                        <div class="detail-info-text">
+                            <div class="detail-info-label">Branch</div>
+                            <div class="detail-info-value">${escapeHTML(att.branch)}</div>
+                        </div>
+                    </div>
+                    <div class="detail-info-row">
+                        <div class="detail-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <circle cx="16" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+                                <line x1="12" y1="3" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <div class="detail-info-text">
+                            <div class="detail-info-label">Room Number</div>
+                            <div class="detail-info-value">${escapeHTML(att.room)}</div>
+                        </div>
+                    </div>
+                    <div class="detail-info-row">
+                        <div class="detail-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="8" height="18" rx="1"/>
+                                <rect x="13" y="3" width="8" height="18" rx="1"/>
+                                <line x1="7" y1="7" x2="7" y2="7.01" stroke-width="2.5"/>
+                                <line x1="17" y1="7" x2="17" y2="7.01" stroke-width="2.5"/>
+                            </svg>
+                        </div>
+                        <div class="detail-info-text">
+                            <div class="detail-info-label">Tracks (Courses)</div>
+                            <div class="detail-info-value">${escapeHTML(att.tracks)}</div>
+                        </div>
+                    </div>
+                    <div class="detail-info-row">
+                        <div class="detail-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="5" width="20" height="13" rx="3"/>
+                                <line x1="2" y1="10" x2="22" y2="10"/>
+                                <rect x="6" y="3" width="3" height="4" rx="1"/>
+                                <rect x="15" y="3" width="3" height="4" rx="1"/>
+                                <circle cx="6.5" cy="19" r="2" fill="currentColor" stroke="none"/>
+                                <circle cx="17.5" cy="19" r="2" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </div>
+                        <div class="detail-info-text">
+                            <div class="detail-info-label">Bus Number</div>
+                            <div class="detail-info-value">${escapeHTML(att.bus)}</div>
+                        </div>
+                    </div>
+                `;
+                detailView.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                detailView.scrollTop = 0;
+                setTimeout(() => backBtn.focus(), 100);
+            }
+
+            function closeDetail() {
+                detailView.classList.remove('active');
+                document.body.style.overflow = '';
+                searchInput.focus();
+            }
+
+            searchInput.addEventListener('input', function() {
+                const val = this.value;
+                searchClear.classList.toggle('visible', val.trim().length > 0);
+                renderAttendeeList(val);
+            });
+
+            searchClear.addEventListener('click', function() {
+                searchInput.value = '';
+                searchClear.classList.remove('visible');
+                renderAttendeeList('');
+                searchInput.focus();
+            });
+
+            backBtn.addEventListener('click', closeDetail);
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && detailView.classList.contains('active')) {
+                    closeDetail();
+                }
+            });
+
+            renderAttendeeList('');
+            searchInput.focus();
+        })();
+    </script>
+</body>
+</html>

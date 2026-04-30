@@ -1,0 +1,16 @@
+create me a single page index.html, here are the requirements:
+* make it super light, no external css lib, mobile first, responsive
+* the icons make them via svg
+* on the home screen i can only see:
+- a search bar
+- icons like on your cellphone, icons for: schedule, speakers, evaluation, errand request, conference resources
+* put test data, 3 men name, 3 women name
+* when i search them on the search bar filter them by name
+* when I click on the name go to the view where in you will display the ff info of the user with svg icons:
+- name
+- branch
+- room #
+- tracks (course they will attend) 
+- bus # (bus they will use when the go out)
+
+this is for a attendee portal on a conference
