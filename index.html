@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conference Attendee Portal</title>
     <style>
-        /* shadcn-inspired dark theme */
         :root {
             --background: 240 10% 3.9%;
             --foreground: 210 20% 98%;
@@ -32,7 +31,6 @@
             font-size: 16px;
             -webkit-tap-highlight-color: transparent;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
@@ -59,7 +57,6 @@
             padding: 0 1rem 2rem;
         }
 
-        /* ── Header ───────────────────── */
         .app-header {
             padding: 1.5rem 0.25rem 0.5rem;
             text-align: left;
@@ -86,7 +83,6 @@
             line-height: 1.2;
         }
 
-        /* ── Search Bar ───────────────── */
         .search-wrap {
             position: relative;
             margin: 1.25rem 0 0.75rem;
@@ -148,7 +144,6 @@
             color: hsl(var(--foreground));
         }
 
-        /* Hide native clear button */
         input[type="text"]::-webkit-search-cancel-button,
         input[type="search"]::-webkit-search-cancel-button {
             display: none;
@@ -158,7 +153,6 @@
             display: none;
         }
 
-        /* ── Icon Grid (shadcn outline style, 5 per row) ── */
         .icon-grid-label {
             font-size: 0.6875rem;
             font-weight: 600;
@@ -217,7 +211,6 @@
             max-width: 4rem;
         }
 
-        /* ── Attendee List ────────────── */
         .attendee-section-label {
             font-size: 0.6875rem;
             font-weight: 600;
@@ -299,7 +292,6 @@
             color: hsl(var(--foreground));
         }
 
-        /* ── No Results ──────────────── */
         .no-results {
             text-align: center;
             padding: 2rem 1rem;
@@ -317,25 +309,37 @@
             opacity: 0.5;
         }
 
-        /* ── Detail View ─────────────── */
+        /* ═══════════════════ DETAIL VIEW – FULL SCREEN ═══════════════════ */
         #detail-view {
-            display: none;
             position: fixed;
             inset: 0;
             z-index: 100;
             background-color: hsl(var(--background));
-            flex-direction: column;
             overflow-y: auto;
-            padding: 0 1rem 2.5rem;
-            animation: fadeSlideIn 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            /* no max-width, no border-radius, no centering transform */
         }
         #detail-view.active {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .detail-wrapper {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 1rem 2.5rem;
+            flex: 1;
             display: flex;
+            flex-direction: column;
         }
-        @keyframes fadeSlideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+
         .detail-header {
             display: flex;
             align-items: center;
@@ -376,7 +380,6 @@
             letter-spacing: -0.02em;
         }
 
-        /* ── Detail Card ─────────────── */
         .detail-card {
             background-color: hsl(var(--card));
             border-radius: var(--radius);
@@ -469,7 +472,6 @@
             word-break: break-word;
         }
 
-        /* ── Toast ───────────────────── */
         .toast {
             position: fixed;
             bottom: 1.5rem;
@@ -487,7 +489,7 @@
             opacity: 0;
             transition: all 0.3s ease;
             letter-spacing: -0.01em;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
             white-space: nowrap;
         }
         .toast.show {
@@ -495,7 +497,6 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* ── Responsive adjustments ─── */
         @media (min-width: 481px) {
             #app {
                 padding: 0 1.5rem 2.5rem;
@@ -515,33 +516,23 @@
                 box-shadow: 0 10px 20px rgba(0,0,0,0.5);
                 padding-bottom: 2rem;
             }
-            #detail-view {
-                max-width: 480px;
-                left: 50%;
-                transform: translateX(-50%);
-                border-radius: 1.5rem;
-                min-height: auto;
-                bottom: auto;
-                max-height: 90vh;
-            }
+            /* No max-width or centering on detail-view – it stays full screen */
         }
     </style>
 </head>
 <body>
     <div id="app">
-        <!-- ── Home View ────────────── -->
+        <!-- Home View -->
         <div id="home-view">
             <header class="app-header">
                 <div class="brand">RLTC LUZON ZONE 2026</div>
                 <h1>Attendee Portal</h1>
             </header>
 
-            <!-- Search Bar -->
             <div class="search-wrap">
                 <span class="search-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"/>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                     </svg>
                 </span>
                 <input type="text" id="searchInput" placeholder="Search your name…" autocomplete="off" enterkeyhint="search">
@@ -552,7 +543,6 @@
                 </button>
             </div>
 
-            <!-- Outline icon grid, 5 per row -->
             <div class="icon-grid-label">Quick Access</div>
             <div class="icon-grid">
                 <div class="app-icon" data-toast="Schedule — Coming soon">
@@ -609,7 +599,6 @@
                 </div>
             </div>
 
-            <!-- Attendee List (hidden until search) -->
             <div class="attendee-section-label" id="attendeeLabel">Attendees</div>
             <div class="attendee-list" id="attendeeList"></div>
             <div class="no-results" id="noResults">
@@ -621,52 +610,122 @@
             </div>
         </div>
 
-        <!-- ── Detail View ────────────── -->
+        <!-- Detail View – full screen, content centered -->
         <div id="detail-view">
-            <div class="detail-header">
-                <button class="back-btn" id="backBtn" aria-label="Go back">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15,18 9,12 15,6"/>
-                    </svg>
-                </button>
-                <span class="detail-header-title">Attendee Info</span>
-            </div>
-            <div class="detail-card" id="detailCard">
-                <!-- Dynamically filled -->
+            <div class="detail-wrapper">
+                <div class="detail-header">
+                    <button class="back-btn" id="backBtn" aria-label="Go back">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15,18 9,12 15,6"/>
+                        </svg>
+                    </button>
+                    <span class="detail-header-title">Attendee Info</span>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-avatar-row">
+                        <div class="detail-avatar-large" id="detailAvatar">?</div>
+                        <div>
+                            <div class="detail-name-large" id="detailName">—</div>
+                            <div class="detail-name-sub">Conference Attendee</div>
+                        </div>
+                    </div>
+                    <div class="detail-info-row">
+                        <div class="detail-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+                            </svg>
+                        </div>
+                        <div class="detail-info-text">
+                            <div class="detail-info-label">Full Name</div>
+                            <div class="detail-info-value" id="detailFullName">—</div>
+                        </div>
+                    </div>
+                    <div class="detail-info-row">
+                        <div class="detail-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="7" width="7" height="14" rx="1"/>
+                                <rect x="14" y="3" width="7" height="18" rx="1"/>
+                                <line x1="6.5" y1="10" x2="6.5" y2="10.01" stroke-width="2.5"/>
+                                <line x1="17.5" y1="7" x2="17.5" y2="7.01" stroke-width="2.5"/>
+                            </svg>
+                        </div>
+                        <div class="detail-info-text">
+                            <div class="detail-info-label">Branch</div>
+                            <div class="detail-info-value" id="detailBranch">—</div>
+                        </div>
+                    </div>
+                    <div class="detail-info-row">
+                        <div class="detail-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <circle cx="16" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+                                <line x1="12" y1="3" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <div class="detail-info-text">
+                            <div class="detail-info-label">Room Number</div>
+                            <div class="detail-info-value" id="detailRoom">—</div>
+                        </div>
+                    </div>
+                    <div class="detail-info-row">
+                        <div class="detail-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="8" height="18" rx="1"/>
+                                <rect x="13" y="3" width="8" height="18" rx="1"/>
+                                <line x1="7" y1="7" x2="7" y2="7.01" stroke-width="2.5"/>
+                                <line x1="17" y1="7" x2="17" y2="7.01" stroke-width="2.5"/>
+                            </svg>
+                        </div>
+                        <div class="detail-info-text">
+                            <div class="detail-info-label">Tracks (Courses)</div>
+                            <div class="detail-info-value" id="detailTracks">—</div>
+                        </div>
+                    </div>
+                    <div class="detail-info-row">
+                        <div class="detail-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="5" width="20" height="13" rx="3"/>
+                                <line x1="2" y1="10" x2="22" y2="10"/>
+                                <rect x="6" y="3" width="3" height="4" rx="1"/>
+                                <rect x="15" y="3" width="3" height="4" rx="1"/>
+                                <circle cx="6.5" cy="19" r="2" fill="currentColor" stroke="none"/>
+                                <circle cx="17.5" cy="19" r="2" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </div>
+                        <div class="detail-info-text">
+                            <div class="detail-info-label">Bus Number</div>
+                            <div class="detail-info-value" id="detailBus">—</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Toast -->
         <div class="toast" id="toast"></div>
     </div>
 
+    <script src="attendees.js"></script>
     <script>
         (function() {
-            const attendees = [
-                { id: 1, name: 'Yuen Y Yalung', gender: 'male', branch: 'Main Office', room: '201',
-                    tracks: 'Web Development, AI & ML', bus: 'Bus 3' },
-                { id: 2, name: 'Jose Lorenzo Cunanan', gender: 'male', branch: 'North Branch', room: '305',
-                    tracks: 'Cloud Computing, DevOps', bus: 'Bus 1' },
-                { id: 3, name: 'Exequil Saylon', gender: 'male', branch: 'South Branch', room: '412',
-                    tracks: 'Data Science, Cybersecurity', bus: 'Bus 2' },
-                { id: 4, name: 'Charlene G Yalung', gender: 'female', branch: 'Main Office', room: '208',
-                    tracks: 'UI/UX Design, Web Development', bus: 'Bus 1' },
-                { id: 5, name: 'Kathy Rose Santos', gender: 'female', branch: 'East Branch', room: '315',
-                    tracks: 'AI & ML, Data Science', bus: 'Bus 3' },
-                { id: 6, name: 'Princess Sarah Masabio', gender: 'female', branch: 'North Branch', room: '502',
-                    tracks: 'Cloud Computing, Cybersecurity', bus: 'Bus 2' },
-            ];
-
+            let attendees = [];
             const searchInput = document.getElementById('searchInput');
             const searchClear = document.getElementById('searchClear');
             const attendeeList = document.getElementById('attendeeList');
             const noResults = document.getElementById('noResults');
             const attendeeLabel = document.getElementById('attendeeLabel');
             const detailView = document.getElementById('detail-view');
-            const detailCard = document.getElementById('detailCard');
             const backBtn = document.getElementById('backBtn');
             const toast = document.getElementById('toast');
             const appIcons = document.querySelectorAll('.app-icon[data-toast]');
+
+            // Detail elements
+            const detailAvatar = document.getElementById('detailAvatar');
+            const detailName = document.getElementById('detailName');
+            const detailFullName = document.getElementById('detailFullName');
+            const detailBranch = document.getElementById('detailBranch');
+            const detailRoom = document.getElementById('detailRoom');
+            const detailTracks = document.getElementById('detailTracks');
+            const detailBus = document.getElementById('detailBus');
 
             let toastTimer = null;
 
@@ -681,10 +740,54 @@
             }
 
             appIcons.forEach(icon => {
-                icon.addEventListener('click', () => {
-                    showToast(icon.getAttribute('data-toast'));
-                });
+                icon.addEventListener('click', () => showToast(icon.getAttribute('data-toast')));
             });
+
+            function parseCSV(text) {
+                const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
+                if (lines.length < 2) return [];
+                const headers = lines[0].split(',').map(h => h.trim());
+                const nameIdx = headers.indexOf('Name');
+                const genderIdx = headers.indexOf('Gender');
+                const branchIdx = headers.indexOf('Branch');
+                const roomIdx = headers.indexOf('Room Number');
+                const busIdx = headers.indexOf('Bus Number');
+                const t1Idx = headers.indexOf('T1');
+                const t2Idx = headers.indexOf('T2');
+                const t3Idx = headers.indexOf('T3');
+                const t4Idx = headers.indexOf('T4');
+                const t5Idx = headers.indexOf('T5');
+
+                const result = [];
+                for (let i = 1; i < lines.length; i++) {
+                    const cols = lines[i].split(',').map(c => c.trim());
+                    let gender = 'male';
+                    const rawGender = (genderIdx !== -1) ? cols[genderIdx].toUpperCase() : '';
+                    if (rawGender === 'F') gender = 'female';
+                    const tracksArr = [];
+                    [t1Idx, t2Idx, t3Idx, t4Idx, t5Idx].forEach(idx => {
+                        if (idx !== -1 && cols[idx] && cols[idx].trim() !== '') tracksArr.push(cols[idx].trim());
+                    });
+                    result.push({
+                        id: i,
+                        name: nameIdx !== -1 ? cols[nameIdx] : '',
+                        gender,
+                        branch: branchIdx !== -1 ? cols[branchIdx] : '',
+                        room: roomIdx !== -1 ? cols[roomIdx] : '',
+                        bus: busIdx !== -1 ? cols[busIdx] : '',
+                        tracks: tracksArr.join(', ')
+                    });
+                }
+                return result;
+            }
+
+            function loadAttendees() {
+                if (typeof CSV_DATA !== 'undefined') {
+                    attendees = parseCSV(CSV_DATA);
+                }
+                renderAttendeeList('');
+                searchInput.focus();
+            }
 
             function renderAttendeeList(filterText = '') {
                 const query = filterText.trim().toLowerCase();
@@ -709,7 +812,7 @@
                         card.setAttribute('tabindex', '0');
                         card.setAttribute('aria-label', `View details for ${att.name}`);
                         const initial = att.name.charAt(0);
-                        const avatarClass = att.gender === 'male' ? 'male' : 'female';
+                        const avatarClass = att.gender === 'female' ? 'female' : 'male';
                         card.innerHTML = `
                             <div class="attendee-avatar ${avatarClass}">${initial}</div>
                             <div class="attendee-info">
@@ -742,85 +845,16 @@
 
             function openDetail(att) {
                 const initial = att.name.charAt(0);
-                const avatarClass = att.gender === 'male' ? 'male' : 'female';
-                detailCard.innerHTML = `
-                    <div class="detail-avatar-row">
-                        <div class="detail-avatar-large ${avatarClass}">${initial}</div>
-                        <div>
-                            <div class="detail-name-large">${escapeHTML(att.name)}</div>
-                            <div class="detail-name-sub">Conference Attendee</div>
-                        </div>
-                    </div>
-                    <div class="detail-info-row">
-                        <div class="detail-info-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="8" r="4"/>
-                                <path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
-                            </svg>
-                        </div>
-                        <div class="detail-info-text">
-                            <div class="detail-info-label">Full Name</div>
-                            <div class="detail-info-value">${escapeHTML(att.name)}</div>
-                        </div>
-                    </div>
-                    <div class="detail-info-row">
-                        <div class="detail-info-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="7" width="7" height="14" rx="1"/>
-                                <rect x="14" y="3" width="7" height="18" rx="1"/>
-                                <line x1="6.5" y1="10" x2="6.5" y2="10.01" stroke-width="2.5"/>
-                                <line x1="17.5" y1="7" x2="17.5" y2="7.01" stroke-width="2.5"/>
-                            </svg>
-                        </div>
-                        <div class="detail-info-text">
-                            <div class="detail-info-label">Branch</div>
-                            <div class="detail-info-value">${escapeHTML(att.branch)}</div>
-                        </div>
-                    </div>
-                    <div class="detail-info-row">
-                        <div class="detail-info-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                <circle cx="16" cy="12" r="1.5" fill="currentColor" stroke="none"/>
-                                <line x1="12" y1="3" x2="12" y2="21"/>
-                            </svg>
-                        </div>
-                        <div class="detail-info-text">
-                            <div class="detail-info-label">Room Number</div>
-                            <div class="detail-info-value">${escapeHTML(att.room)}</div>
-                        </div>
-                    </div>
-                    <div class="detail-info-row">
-                        <div class="detail-info-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="8" height="18" rx="1"/>
-                                <rect x="13" y="3" width="8" height="18" rx="1"/>
-                                <line x1="7" y1="7" x2="7" y2="7.01" stroke-width="2.5"/>
-                                <line x1="17" y1="7" x2="17" y2="7.01" stroke-width="2.5"/>
-                            </svg>
-                        </div>
-                        <div class="detail-info-text">
-                            <div class="detail-info-label">Tracks (Courses)</div>
-                            <div class="detail-info-value">${escapeHTML(att.tracks)}</div>
-                        </div>
-                    </div>
-                    <div class="detail-info-row">
-                        <div class="detail-info-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="5" width="20" height="13" rx="3"/>
-                                <line x1="2" y1="10" x2="22" y2="10"/>
-                                <rect x="6" y="3" width="3" height="4" rx="1"/>
-                                <rect x="15" y="3" width="3" height="4" rx="1"/>
-                                <circle cx="6.5" cy="19" r="2" fill="currentColor" stroke="none"/>
-                                <circle cx="17.5" cy="19" r="2" fill="currentColor" stroke="none"/>
-                            </svg>
-                        </div>
-                        <div class="detail-info-text">
-                            <div class="detail-info-label">Bus Number</div>
-                            <div class="detail-info-value">${escapeHTML(att.bus)}</div>
-                        </div>
-                    </div>
-                `;
+                const avatarClass = att.gender === 'female' ? 'female' : 'male';
+                detailAvatar.textContent = initial;
+                detailAvatar.className = 'detail-avatar-large ' + avatarClass;
+                detailName.textContent = att.name;
+                detailFullName.textContent = att.name;
+                detailBranch.textContent = att.branch;
+                detailRoom.textContent = att.room;
+                detailTracks.textContent = att.tracks;
+                detailBus.textContent = att.bus;
+
                 detailView.classList.add('active');
                 document.body.style.overflow = 'hidden';
                 detailView.scrollTop = 0;
@@ -834,28 +868,23 @@
             }
 
             searchInput.addEventListener('input', function() {
-                const val = this.value;
-                searchClear.classList.toggle('visible', val.trim().length > 0);
-                renderAttendeeList(val);
+                searchClear.classList.toggle('visible', this.value.trim().length > 0);
+                renderAttendeeList(this.value);
             });
-
-            searchClear.addEventListener('click', function() {
+            searchClear.addEventListener('click', () => {
                 searchInput.value = '';
                 searchClear.classList.remove('visible');
                 renderAttendeeList('');
                 searchInput.focus();
             });
-
             backBtn.addEventListener('click', closeDetail);
-
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && detailView.classList.contains('active')) {
                     closeDetail();
                 }
             });
 
-            renderAttendeeList('');
-            searchInput.focus();
+            loadAttendees();
         })();
     </script>
 </body>
