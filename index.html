@@ -631,13 +631,24 @@
                     </div>
                     <div class="detail-info-row">
                         <div class="detail-info-icon">
-                            <svg width="20" height="20" viewBox="0 0 576 512" style="fill:currentColor;stroke:none">
-                                <path d="M0 112C0 70.5 31.6 36.4 72 32.4l0-.4 280 0c53 0 96 43 96 96l0 176-176 0c-39.8 0-72 32.2-72 72l0 60c0 24.3-19.7 44-44 44s-44-19.7-44-44l0-228-64 0c-26.5 0-48-21.5-48-48l0-48zM236.8 480c7.1-13.1 11.2-28.1 11.2-44l0-60c0-13.3 10.7-24 24-24l248 0c13.3 0 24 10.7 24 24l0 24c0 44.2-35.8 80-80 80l-227.2 0zM80 80c-17.7 0-32 14.3-32 32l0 48 64 0 0-48c0-17.7-14.3-32-32-32z"/>
+                            <svg width="20" height="20" viewBox="0 0 448 512" style="fill:currentColor;stroke:none">
+                                <path d="M128 0C110.3 0 96 14.3 96 32l0 32-32 0C28.7 64 0 92.7 0 128l0 48 448 0 0-48c0-35.3-28.7-64-64-64l-32 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32-128 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32zM0 224L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192-448 0z"/>
                             </svg>
                         </div>
                         <div class="detail-info-text">
-                            <div class="detail-info-label">Tracks</div>
-                            <div class="detail-info-value" id="detailTracks">—</div>
+                            <div class="detail-info-label">Day 1 Track</div>
+                            <div class="detail-info-value" id="detailDay1">—</div>
+                        </div>
+                    </div>
+                    <div class="detail-info-row">
+                        <div class="detail-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 448 512" style="fill:currentColor;stroke:none">
+                                <path d="M128 0C110.3 0 96 14.3 96 32l0 32-32 0C28.7 64 0 92.7 0 128l0 48 448 0 0-48c0-35.3-28.7-64-64-64l-32 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32-128 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32zM0 224L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192-448 0z"/>
+                            </svg>
+                        </div>
+                        <div class="detail-info-text">
+                            <div class="detail-info-label">Day 2 Track</div>
+                            <div class="detail-info-value" id="detailDay2">—</div>
                         </div>
                     </div>
                     <div class="detail-info-row">
@@ -648,7 +659,7 @@
                         </div>
                         <div class="detail-info-text">
                             <div class="detail-info-label">Car Number</div>
-                            <div class="detail-info-value" id="detailBus">—</div>
+                            <div class="detail-info-value" id="detailCar">—</div>
                         </div>
                     </div>
                     <div class="detail-info-row">
@@ -658,7 +669,7 @@
                             </svg>
                         </div>
                         <div class="detail-info-text">
-                            <div class="detail-info-label">Outing Group</div>
+                            <div class="detail-info-label">Outing Number</div>
                             <div class="detail-info-value" id="detailOuting">—</div>
                         </div>
                     </div>
@@ -684,45 +695,66 @@
             const detailFullName = document.getElementById('detailFullName');
             const detailBranch = document.getElementById('detailBranch');
             const detailRoom = document.getElementById('detailRoom');
-            const detailTracks = document.getElementById('detailTracks');
-            const detailBus = document.getElementById('detailBus');
+            const detailDay1 = document.getElementById('detailDay1');
+            const detailDay2 = document.getElementById('detailDay2');
+            const detailCar = document.getElementById('detailCar');
             const detailOuting = document.getElementById('detailOuting');
+
+            function parseCSVLine(line) {
+                const cols = [];
+                let cur = '';
+                let inQuotes = false;
+                for (let i = 0; i < line.length; i++) {
+                    const ch = line[i];
+                    if (inQuotes) {
+                        if (ch === '"') {
+                            if (line[i + 1] === '"') { cur += '"'; i++; }
+                            else inQuotes = false;
+                        } else {
+                            cur += ch;
+                        }
+                    } else if (ch === '"') {
+                        inQuotes = true;
+                    } else if (ch === ',') {
+                        cols.push(cur.trim());
+                        cur = '';
+                    } else {
+                        cur += ch;
+                    }
+                }
+                cols.push(cur.trim());
+                return cols;
+            }
 
             function parseCSV(text) {
                 const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
                 if (lines.length < 2) return [];
-                const headers = lines[0].split(',').map(h => h.trim());
+                const headers = parseCSVLine(lines[0]);
                 const nameIdx = headers.indexOf('Name');
                 const genderIdx = headers.indexOf('Gender');
                 const branchIdx = headers.indexOf('Branch');
                 const roomIdx = headers.indexOf('Room Number');
-                const busIdx = headers.indexOf('Bus Number');
-                const outingIdx = headers.indexOf('Outing Group');
-                const t1Idx = headers.indexOf('T1');
-                const t2Idx = headers.indexOf('T2');
-                const t3Idx = headers.indexOf('T3');
-                const t4Idx = headers.indexOf('T4');
-                const t5Idx = headers.indexOf('T5');
+                const carIdx = headers.indexOf('Car Number');
+                const d1tIdx = headers.indexOf('D1T');
+                const d2tIdx = headers.indexOf('D2T');
+                const outingIdx = headers.indexOf('Outing Number');
 
                 const result = [];
                 for (let i = 1; i < lines.length; i++) {
-                    const cols = lines[i].split(',').map(c => c.trim());
+                    const cols = parseCSVLine(lines[i]);
                     let gender = 'male';
                     const rawGender = (genderIdx !== -1) ? cols[genderIdx].toUpperCase() : '';
                     if (rawGender === 'F') gender = 'female';
-                    const tracksArr = [];
-                    [t1Idx, t2Idx, t3Idx, t4Idx, t5Idx].forEach(idx => {
-                        if (idx !== -1 && cols[idx] && cols[idx].trim() !== '') tracksArr.push(cols[idx].trim());
-                    });
                     result.push({
                         id: i,
                         name: nameIdx !== -1 ? cols[nameIdx] : '',
                         gender,
                         branch: branchIdx !== -1 ? cols[branchIdx] : '',
                         room: roomIdx !== -1 ? cols[roomIdx] : '',
-                        bus: busIdx !== -1 ? cols[busIdx] : '',
-                        outingGroup: outingIdx !== -1 ? cols[outingIdx] : '',
-                        tracks: tracksArr.join(', ')
+                        car: carIdx !== -1 ? cols[carIdx] : '',
+                        day1Track: d1tIdx !== -1 ? cols[d1tIdx] : '',
+                        day2Track: d2tIdx !== -1 ? cols[d2tIdx] : '',
+                        outingNumber: outingIdx !== -1 ? cols[outingIdx] : ''
                     });
                 }
                 return result;
@@ -797,11 +829,12 @@
                 detailAvatar.className = 'detail-avatar-large ' + avatarClass;
                 detailName.textContent = att.name;
                 detailFullName.textContent = att.name;
-                detailBranch.textContent = att.branch;
-                detailRoom.textContent = att.room;
-                detailTracks.textContent = att.tracks;
-                detailBus.textContent = att.bus;
-                detailOuting.textContent = att.outingGroup;
+                detailBranch.textContent = att.branch || '—';
+                detailRoom.textContent = att.room || '—';
+                detailDay1.textContent = att.day1Track || '—';
+                detailDay2.textContent = att.day2Track || '—';
+                detailCar.textContent = att.car || '—';
+                detailOuting.textContent = att.outingNumber || '—';
 
                 detailView.classList.add('active');
                 document.body.style.overflow = 'hidden';
