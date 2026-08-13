@@ -852,6 +852,12 @@
                 searchClear.classList.toggle('visible', this.value.trim().length > 0);
                 renderAttendeeList(this.value);
             });
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    searchInput.blur();
+                }
+            });
             searchClear.addEventListener('click', () => {
                 searchInput.value = '';
                 searchClear.classList.remove('visible');
