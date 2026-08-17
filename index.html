@@ -69,6 +69,31 @@
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
         }
+        .title-row {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+        .title-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+        }
+        .brand-logos {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        .brand-logos img {
+            height: 100%;
+            max-height: 3.5rem;
+            width: auto;
+            display: block;
+        }
         .app-header .brand {
             font-size: 0.75rem;
             font-weight: 600;
@@ -549,8 +574,16 @@
         <!-- Home View -->
         <div id="home-view">
             <header class="app-header">
-                <div class="brand">RLTC LUZON ZONE 2026</div>
-                <h1>Attendee Portal</h1>
+                <div class="title-row">
+                    <div class="title-text">
+                        <div class="brand">RLTC LUZON ZONE 2026</div>
+                        <h1>Attendee Portal</h1>
+                    </div>
+                    <div class="brand-logos">
+                        <img src="rltc-sm.webp" alt="RLTC logo">
+                        <img src="lingkod-sm.webp" alt="Lingkod logo">
+                    </div>
+                </div>
             </header>
 
             <div class="search-wrap">
