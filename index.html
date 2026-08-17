@@ -6,18 +6,20 @@
     <title>Conference Attendee Portal</title>
     <style>
         :root {
-            --background: 240 10% 3.9%;
-            --foreground: 210 20% 98%;
-            --card: 240 10% 10%;
-            --card-foreground: 210 20% 98%;
-            --border: 240 3.7% 15.9%;
-            --muted: 240 3.7% 15.9%;
-            --muted-foreground: 240 5% 64.9%;
-            --primary: 210 20% 98%;
-            --primary-foreground: 240 5.9% 10%;
-            --secondary: 240 3.7% 15.9%;
-            --secondary-foreground: 210 20% 98%;
-            --ring: 240 5% 64.9%;
+            /* Palette: dark #264f8a, light #508dcc, icon outline #fcb30c */
+            --background: 215 57% 34%;      /* #264f8a */
+            --foreground: 210 33% 97%;
+            --card: 212 53% 41%;
+            --card-foreground: 210 33% 97%;
+            --border: 211 52% 52%;
+            --muted: 212 48% 46%;
+            --muted-foreground: 211 35% 82%;
+            --primary: 211 55% 56%;         /* #508dcc */
+            --primary-foreground: 210 33% 97%;
+            --secondary: 212 51% 45%;
+            --secondary-foreground: 210 33% 97%;
+            --ring: 211 55% 56%;            /* #508dcc */
+            --accent: 42 97% 52%;           /* #fcb30c */
             --radius: 0.75rem;
         }
 
@@ -95,7 +97,7 @@
             border-radius: var(--radius);
             font-size: 0.9375rem;
             font-family: inherit;
-            background-color: hsl(var(--card));
+            background-color: hsl(var(--background));
             color: hsl(var(--foreground));
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
             transition: all 0.2s ease;
@@ -116,7 +118,7 @@
             top: 50%;
             transform: translateY(-50%);
             pointer-events: none;
-            color: hsl(var(--muted-foreground));
+            color: hsl(var(--accent));
             display: flex;
             align-items: center;
         }
@@ -133,7 +135,7 @@
             display: none;
             align-items: center;
             justify-content: center;
-            color: hsl(var(--muted-foreground));
+            color: hsl(var(--accent));
             transition: all 0.2s ease;
         }
         .search-clear.visible {
@@ -190,19 +192,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid hsl(var(--border));
+            border: 1px solid hsl(var(--accent));
             background-color: transparent;
             box-shadow: none;
             transition: all 0.2s ease;
             padding: 0.5rem;
-            color: hsl(var(--muted-foreground));
+            color: hsl(var(--accent));
         }
         .icon-grid .app-icon:active .icon-square {
-            background-color: hsl(var(--muted));
-            border-color: hsl(var(--ring));
+            background-color: hsla(var(--accent), 0.15);
+            border-color: hsl(var(--accent));
         }
         .icon-grid .app-icon .icon-square svg {
-            stroke: hsl(var(--muted-foreground));
+            stroke: hsl(var(--accent));
             fill: none;
         }
         .icon-grid .app-icon .icon-label {
@@ -263,7 +265,7 @@
             background-color: hsl(var(--primary));
         }
         .attendee-avatar.male {
-            background-color: hsl(217 91% 60%);
+            background-color: hsl(211 55% 56%); /* #508dcc */
         }
         .attendee-avatar.female {
             background-color: hsl(340 82% 65%);
@@ -286,7 +288,7 @@
         }
         .attendee-chevron {
             flex-shrink: 0;
-            color: hsl(var(--muted-foreground));
+            color: hsl(var(--accent));
             display: flex;
             align-items: center;
             transition: transform 0.2s ease;
@@ -311,6 +313,7 @@
             display: block;
             margin: 0 auto 0.75rem;
             opacity: 0.5;
+            color: hsl(var(--accent));
         }
 
         /* ═══════════════════ DETAIL VIEW – FULL SCREEN ═══════════════════ */
@@ -366,7 +369,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: hsl(var(--foreground));
+            color: hsl(var(--accent));
             transition: all 0.2s ease;
             flex-shrink: 0;
         }
@@ -414,7 +417,7 @@
             flex-shrink: 0;
         }
         .detail-avatar-large.male {
-            background-color: hsl(217 91% 60%);
+            background-color: hsl(211 55% 56%); /* #508dcc */
         }
         .detail-avatar-large.female {
             background-color: hsl(340 82% 65%);
@@ -450,7 +453,8 @@
             justify-content: center;
             flex-shrink: 0;
             background-color: hsl(var(--muted));
-            color: hsl(var(--muted-foreground));
+            border: 1px solid hsl(var(--accent));
+            color: hsl(var(--accent));
         }
         .detail-info-icon svg {
             stroke: currentColor;
