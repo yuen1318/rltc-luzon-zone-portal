@@ -217,6 +217,47 @@
             max-width: 4rem;
         }
 
+        .announcement-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: hsl(var(--muted-foreground));
+            margin: 1.25rem 0 0.75rem 0.25rem;
+        }
+        .announcement-card {
+            background-color: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+        .announcement-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid hsl(var(--border));
+        }
+        .announcement-row:last-child {
+            border-bottom: none;
+        }
+        .announcement-day {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: hsl(var(--foreground));
+            letter-spacing: -0.01em;
+        }
+        .announcement-value {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: hsl(var(--accent));
+            letter-spacing: -0.01em;
+            text-align: right;
+        }
+
         .attendee-section-label {
             font-size: 0.6875rem;
             font-weight: 600;
@@ -578,6 +619,26 @@
                 </a>
             </div>
 
+            <div class="announcement-label" id="announcementLabel">Announcements</div>
+            <div class="announcement-card" id="announcementCard">
+                <div class="announcement-row">
+                    <div class="announcement-day">Day 1 IPT</div>
+                    <div class="announcement-value">Room 1, 2, 3</div>
+                </div>
+                <div class="announcement-row">
+                    <div class="announcement-day">Day 2 IPT</div>
+                    <div class="announcement-value">Room 4, 5, 6</div>
+                </div>
+                <div class="announcement-row">
+                    <div class="announcement-day">Day 3 IPT</div>
+                    <div class="announcement-value">Room 7, 8, 9</div>
+                </div>
+                <div class="announcement-row">
+                    <div class="announcement-day">Day 4 IPT</div>
+                    <div class="announcement-value">Room 10, 11, 12</div>
+                </div>
+            </div>
+
             <div class="attendee-section-label" id="attendeeLabel">Attendees</div>
             <div class="attendee-list" id="attendeeList"></div>
             <div class="no-results" id="noResults">
@@ -698,6 +759,8 @@
             const attendeeList = document.getElementById('attendeeList');
             const noResults = document.getElementById('noResults');
             const attendeeLabel = document.getElementById('attendeeLabel');
+            const announcementLabel = document.getElementById('announcementLabel');
+            const announcementCard = document.getElementById('announcementCard');
             const detailView = document.getElementById('detail-view');
             const backBtn = document.getElementById('backBtn');
 
@@ -788,9 +851,13 @@
                     attendeeList.innerHTML = '';
                     noResults.classList.remove('visible');
                     attendeeLabel.style.display = 'none';
+                    announcementLabel.style.display = 'block';
+                    announcementCard.style.display = 'block';
                     return;
                 }
                 attendeeLabel.style.display = 'block';
+                announcementLabel.style.display = 'none';
+                announcementCard.style.display = 'none';
                 const filtered = attendees.filter(a => a.name.toLowerCase().includes(query));
                 attendeeList.innerHTML = '';
                 if (filtered.length === 0) {
