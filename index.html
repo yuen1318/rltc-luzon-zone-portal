@@ -546,6 +546,60 @@
             word-break: break-word;
         }
 
+        .icon-grid button.app-icon {
+            background: transparent;
+            border: none;
+            padding: 0;
+            font: inherit;
+        }
+
+        .venue-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.88);
+            padding: 1rem;
+        }
+        .venue-modal.active {
+            display: flex;
+        }
+        .venue-modal-content {
+            position: relative;
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .venue-modal-close {
+            background-color: hsl(var(--card));
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
+            border-radius: 9999px;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        .venue-modal-close svg {
+            stroke: currentColor;
+        }
+        .venue-modal-image {
+            max-width: 100%;
+            max-height: calc(100vh - 5rem);
+            object-fit: contain;
+            border-radius: var(--radius);
+            border: 1px solid hsl(var(--border));
+            background-color: hsl(var(--card));
+        }
+
         @media (min-width: 481px) {
             #app {
                 padding: 0 1.5rem 2.5rem;
@@ -650,6 +704,12 @@
                     </div>
                     <span class="icon-label">Music</span>
                 </a>
+                <button class="app-icon" id="venueLayoutBtn" type="button" aria-label="View venue layout">
+                    <div class="icon-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 640 512" style="fill:currentColor;stroke:none"><!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M576 48c0-11.1-5.7-21.4-15.2-27.2s-21.2-6.4-31.1-1.4L413.5 77.5 234.1 17.6c-8.1-2.7-16.8-2.1-24.4 1.7l-128 64C70.8 88.8 64 99.9 64 112l0 352c0 11.1 5.7 21.4 15.2 27.2s21.2 6.4 31.1 1.4l116.1-58.1 173.3 57.8c-4.3-6.4-8.5-13.1-12.6-19.9-11-18.3-21.9-39.3-30-61.8l-101.2-33.7 0-284.5 128 42.7 0 99.3c31-35.8 77-58.4 128-58.4 22.6 0 44.2 4.4 64 12.5L576 48zM392 341.9c0 68.9 64.1 150.4 98.6 189.3 11.6 13 31.3 13 42.9 0 34.5-38.9 98.6-120.4 98.6-189.3 0-65.1-53.7-117.9-120-117.9S392 276.8 392 341.9z"/></svg>
+                    </div>
+                    <span class="icon-label">Venue<br>Layout</span>
+                </button>
             </div>
 
             <div class="announcement-label" id="announcementLabel">Announcements</div>
@@ -783,6 +843,18 @@
             </div>
         </div>
 
+        <!-- Venue Layout Modal -->
+        <div class="venue-modal" id="venueModal" role="dialog" aria-modal="true" aria-label="Venue layout">
+            <div class="venue-modal-content">
+                <button class="venue-modal-close" id="venueModalClose" type="button" aria-label="Close venue layout">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+                <img class="venue-modal-image" src="venue-layout.png" alt="Venue layout map">
+            </div>
+        </div>
+
     <script src="attendees.js"></script>
     <script>
         (function() {
@@ -796,6 +868,9 @@
             const announcementCard = document.getElementById('announcementCard');
             const detailView = document.getElementById('detail-view');
             const backBtn = document.getElementById('backBtn');
+            const venueModal = document.getElementById('venueModal');
+            const venueModalClose = document.getElementById('venueModalClose');
+            const venueLayoutBtn = document.getElementById('venueLayoutBtn');
 
             // Detail elements
             const detailAvatar = document.getElementById('detailAvatar');
@@ -962,6 +1037,20 @@
                 searchInput.focus();
             }
 
+            function openVenueModal() {
+                venueModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => venueModalClose.focus(), 100);
+            }
+
+            function closeVenueModal() {
+                venueModal.classList.remove('active');
+                if (!detailView.classList.contains('active')) {
+                    document.body.style.overflow = '';
+                }
+                venueLayoutBtn.focus();
+            }
+
             searchInput.addEventListener('input', function() {
                 searchClear.classList.toggle('visible', this.value.trim().length > 0);
                 renderAttendeeList(this.value);
@@ -982,6 +1071,16 @@
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && detailView.classList.contains('active')) {
                     closeDetail();
+                }
+                if (e.key === 'Escape' && venueModal.classList.contains('active')) {
+                    closeVenueModal();
+                }
+            });
+            venueLayoutBtn.addEventListener('click', openVenueModal);
+            venueModalClose.addEventListener('click', closeVenueModal);
+            venueModal.addEventListener('click', (e) => {
+                if (e.target === venueModal) {
+                    closeVenueModal();
                 }
             });
 
