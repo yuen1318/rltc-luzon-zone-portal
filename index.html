@@ -1094,12 +1094,12 @@
                 detailName.textContent = att.name;
                 detailBranch.textContent = att.branch || '—';
                 detailRoom.textContent = att.room || '—';
-                const isBgl = att.bgl === true;
-                if (detailDay1Row) detailDay1Row.style.display = isBgl ? 'none' : '';
-                if (detailDay2Row) detailDay2Row.style.display = isBgl ? 'none' : '';
+                const isOthers = (att.branch || '').trim().toLowerCase() === 'others';
+                if (detailDay1Row) detailDay1Row.style.display = isOthers ? 'none' : '';
+                if (detailDay2Row) detailDay2Row.style.display = isOthers ? 'none' : '';
                 if (beeSwarm) {
                     beeSwarm.innerHTML = '';
-                    if (isBgl) {
+                    if (att.bgl === true) {
                         releaseBees();
                     }
                 }
