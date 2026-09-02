@@ -407,6 +407,71 @@
             pointer-events: auto;
         }
 
+        .bee-swarm {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .bee {
+            position: fixed;
+            left: calc(50% + var(--bee-start-x, 0vw));
+            top: calc(38% + var(--bee-start-y, 0vh));
+            font-size: calc(var(--bee-size, 2.2) * 1rem);
+            opacity: 0;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+            transform: translate(-50%, -50%) scale(0);
+            animation: beeBuzz 2.4s ease-in-out var(--bee-delay, 0s) forwards;
+        }
+        @keyframes beeBuzz {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            8% {
+                transform: translate(-50%, -50%) scale(1.2) rotate(-10deg);
+                opacity: 1;
+            }
+            10% {
+                transform: translate(-50%, -50%) scale(1) rotate(5deg);
+                opacity: 1;
+            }
+            20% {
+                transform: translate(calc(-50% + 8px), calc(-50% - 6px)) rotate(-8deg);
+            }
+            30% {
+                transform: translate(calc(-50% - 6px), calc(-50% + 8px)) rotate(8deg);
+            }
+            40% {
+                transform: translate(calc(-50% + 7px), calc(-50% + 5px)) rotate(-5deg);
+            }
+            50% {
+                transform: translate(calc(-50% - 8px), calc(-50% - 7px)) rotate(6deg);
+            }
+            60% {
+                transform: translate(calc(-50% + 5px), calc(-50% - 8px)) rotate(-7deg);
+            }
+            70% {
+                transform: translate(calc(-50% - 7px), calc(-50% + 6px)) rotate(5deg);
+            }
+            80% {
+                transform: translate(calc(-50% + 8px), calc(-50% + 7px)) rotate(-6deg);
+            }
+            88% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            92% {
+                transform: translate(calc(-50% + var(--bee-end-x) * 0.2), calc(-50% + var(--bee-end-y) * 0.2)) scale(0.95) rotate(var(--bee-rotate, 25deg));
+                opacity: 1;
+            }
+            100% {
+                transform: translate(calc(-50% + var(--bee-end-x)), calc(-50% + var(--bee-end-y))) scale(0.7) rotate(var(--bee-rotate, 25deg));
+                opacity: 0;
+            }
+        }
+
         .detail-wrapper {
             width: 100%;
             max-width: 480px;
@@ -749,6 +814,7 @@
 
         <!-- Detail View – full screen, content centered -->
         <div id="detail-view">
+            <div class="bee-swarm" id="beeSwarm"></div>
             <div class="detail-wrapper">
                 <div class="detail-header">
                     <button class="back-btn" id="backBtn" aria-label="Go back">
@@ -886,6 +952,7 @@
             const detailDay1Row = document.getElementById('detailDay1Row');
             const detailDay2Row = document.getElementById('detailDay2Row');
             const detailCar = document.getElementById('detailCar');
+            const beeSwarm = document.getElementById('beeSwarm');
             const detailOuting = document.getElementById('detailOuting');
             const detailSeparateEvent = document.getElementById('detailSeparateEvent');
 
@@ -928,6 +995,7 @@
                 const d2tIdx = headers.indexOf('D2T');
                 const outingIdx = headers.indexOf('Outing Number');
                 const sepEventIdx = headers.indexOf('Separate Event Number');
+                const bglIdx = headers.indexOf('BGL');
 
                 const result = [];
                 for (let i = 1; i < lines.length; i++) {
@@ -945,7 +1013,8 @@
                         day1Track: d1tIdx !== -1 ? cols[d1tIdx] : '',
                         day2Track: d2tIdx !== -1 ? cols[d2tIdx] : '',
                         outingNumber: outingIdx !== -1 ? cols[outingIdx] : '',
-                        separateEventNumber: sepEventIdx !== -1 ? cols[sepEventIdx] : ''
+                        separateEventNumber: sepEventIdx !== -1 ? cols[sepEventIdx] : '',
+                        bgl: bglIdx !== -1 ? cols[bglIdx].toUpperCase() === 'TRUE' : false
                     });
                 }
                 return result;
@@ -1025,9 +1094,15 @@
                 detailName.textContent = att.name;
                 detailBranch.textContent = att.branch || '—';
                 detailRoom.textContent = att.room || '—';
-                const isOthers = (att.branch || '').trim().toLowerCase() === 'others';
-                if (detailDay1Row) detailDay1Row.style.display = isOthers ? 'none' : '';
-                if (detailDay2Row) detailDay2Row.style.display = isOthers ? 'none' : '';
+                const isBgl = att.bgl === true;
+                if (detailDay1Row) detailDay1Row.style.display = isBgl ? 'none' : '';
+                if (detailDay2Row) detailDay2Row.style.display = isBgl ? 'none' : '';
+                if (beeSwarm) {
+                    beeSwarm.innerHTML = '';
+                    if (isBgl) {
+                        releaseBees();
+                    }
+                }
                 detailDay1.textContent = att.day1Track || '—';
                 detailDay2.textContent = att.day2Track || '—';
                 detailCar.textContent = att.car || '—';
@@ -1043,7 +1118,35 @@
             function closeDetail() {
                 detailView.classList.remove('active');
                 document.body.style.overflow = '';
+                if (beeSwarm) beeSwarm.innerHTML = '';
                 searchInput.focus();
+            }
+
+            function releaseBees() {
+                if (!beeSwarm) return;
+                const count = 12;
+                for (let i = 0; i < count; i++) {
+                    const bee = document.createElement('div');
+                    bee.className = 'bee';
+                    bee.textContent = '🐝';
+                    const startX = (Math.random() - 0.5) * 50;
+                    const startY = (Math.random() - 0.5) * 30;
+                    const endAngle = Math.random() * Math.PI * 2;
+                    const endDistance = 45 + Math.random() * 45;
+                    const endX = Math.cos(endAngle) * endDistance;
+                    const endY = Math.sin(endAngle) * endDistance;
+                    const delay = Math.random() * 0.5;
+                    const size = 1.6 + Math.random() * 1.4;
+                    const rotate = -50 + Math.random() * 100;
+                    bee.style.setProperty('--bee-start-x', `${startX.toFixed(1)}vw`);
+                    bee.style.setProperty('--bee-start-y', `${startY.toFixed(1)}vh`);
+                    bee.style.setProperty('--bee-end-x', `${endX.toFixed(1)}vw`);
+                    bee.style.setProperty('--bee-end-y', `${endY.toFixed(1)}vh`);
+                    bee.style.setProperty('--bee-delay', `${delay.toFixed(2)}s`);
+                    bee.style.setProperty('--bee-size', size.toFixed(2));
+                    bee.style.setProperty('--bee-rotate', `${rotate.toFixed(0)}deg`);
+                    beeSwarm.appendChild(bee);
+                }
             }
 
             function openVenueModal() {
