@@ -472,6 +472,22 @@
             }
         }
 
+        .roommate-bee {
+            display: inline-block;
+            margin-left: 0.35rem;
+            font-size: 1rem;
+            line-height: 1;
+            vertical-align: middle;
+            animation: beeJitter 0.3s ease-in-out infinite;
+        }
+        @keyframes beeJitter {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(1px, -1px) rotate(-10deg); }
+            40% { transform: translate(-1px, 1px) rotate(8deg); }
+            60% { transform: translate(1px, 1px) rotate(-8deg); }
+            80% { transform: translate(-1px, -1px) rotate(10deg); }
+        }
+
         .detail-wrapper {
             width: 100%;
             max-width: 480px;
@@ -1068,7 +1084,7 @@
                 if (roommateCard) {
                     roommateCard.innerHTML = roommates.map(rm => `
                         <div class="announcement-row">
-                            <div class="announcement-day">${escapeHTML(rm.name)}</div>
+                            <div class="announcement-day">${escapeHTML(rm.name)}${rm.bgl === true ? '<span class="roommate-bee" aria-hidden="true">🐝</span>' : ''}</div>
                             <div class="announcement-value">${escapeHTML(rm.branch)}</div>
                         </div>
                     `).join('');
