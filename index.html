@@ -273,6 +273,30 @@
         .announcement-row:last-child {
             border-bottom: none;
         }
+        .outing-row {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 0;
+            padding: 0.75rem 0.5rem;
+        }
+        .outing-col {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+        .outing-col + .outing-col {
+            padding-left: 0.75rem;
+        }
+        .outing-value {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: hsl(var(--accent));
+            letter-spacing: -0.01em;
+        }
         .announcement-day {
             font-size: 0.8125rem;
             font-weight: 600;
@@ -903,13 +927,15 @@
                             <div class="announcement-day">Day 2 Track</div>
                             <div class="announcement-value" id="detailDay2Track">—</div>
                         </div>
-                        <div class="announcement-row">
-                            <div class="announcement-day">Outing Number</div>
-                            <div class="announcement-value" id="detailOuting">—</div>
-                        </div>
-                        <div class="announcement-row">
-                            <div class="announcement-day">Separate Event Number</div>
-                            <div class="announcement-value" id="detailSeparateEvent">—</div>
+                        <div class="announcement-row outing-row">
+                            <div class="outing-col">
+                                <div class="announcement-day">Outing #</div>
+                                <div class="outing-value" id="detailOuting">—</div>
+                            </div>
+                            <div class="outing-col">
+                                <div class="announcement-day" id="eventLabel">MOF / BLOOM #</div>
+                                <div class="outing-value" id="detailSeparateEvent">—</div>
+                            </div>
                         </div>
                     </div>
                     <div id="roommateSection">
@@ -969,6 +995,7 @@
             const detailDay1Track = document.getElementById('detailDay1Track');
             const detailDay2Track = document.getElementById('detailDay2Track');
             const beeSwarm = document.getElementById('beeSwarm');
+            const eventLabel = document.getElementById('eventLabel');
             const detailOuting = document.getElementById('detailOuting');
             const detailSeparateEvent = document.getElementById('detailSeparateEvent');
             const roommateSection = document.getElementById('roommateSection');
@@ -1132,6 +1159,7 @@
                 if (bglNote) bglNote.style.display = att.bgl === true ? '' : 'none';
                 detailDay1Track.textContent = formatTrack(att.day1Track);
                 detailDay2Track.textContent = formatTrack(att.day2Track);
+                if (eventLabel) eventLabel.textContent = att.gender === 'male' ? 'MOF #' : att.gender === 'female' ? 'BLOOM #' : 'Event #';
                 detailOuting.textContent = att.outingNumber || '—';
                 detailSeparateEvent.textContent = att.separateEventNumber || '—';
 
