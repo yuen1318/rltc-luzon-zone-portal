@@ -972,6 +972,10 @@
                         <li>Be the point of contact for your members</li>
                     </ul>
                 </div>
+                <div class="bgl-role-card" id="iptNote" style="display:none">
+                    <div class="bgl-role-title">IPT Note</div>
+                    <p class="bgl-role-intro">Hey Dee! Your room’s got IPT on Friday. For you, it’s optional — join if you can, skip if you don’t. No pressure!</p>
+                </div>
             </div>
         </div>
 
@@ -1020,6 +1024,7 @@
             const roommateSection = document.getElementById('roommateSection');
             const roommateCard = document.getElementById('roommateCard');
             const bglNote = document.getElementById('bglNote');
+            const iptNote = document.getElementById('iptNote');
 
             function parseCSVLine(line) {
                 const cols = [];
@@ -1176,6 +1181,7 @@
                     }
                 }
                 if (bglNote) bglNote.style.display = att.bgl === true ? '' : 'none';
+                if (iptNote) iptNote.style.display = (att.name || '').trim().toUpperCase() === 'ANDREA COLEEN P. VELASCO' ? '' : 'none';
                 detailDay1Track.textContent = formatTrack(att.day1Track);
                 detailDay2Track.textContent = formatTrack(att.day2Track);
                 if (eventLabel) eventLabel.textContent = att.gender === 'male' ? 'MOF #' : att.gender === 'female' ? 'BLOOM #' : 'Event #';
