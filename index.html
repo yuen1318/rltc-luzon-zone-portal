@@ -311,6 +311,21 @@
             text-align: right;
         }
 
+        .announcement-value a {
+            color: hsl(var(--accent));
+            text-decoration: none;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 999px;
+            border: 1px solid hsl(var(--accent));
+            transition: background-color 0.2s ease;
+        }
+
+        .announcement-value a:hover,
+        .announcement-value a:focus-visible {
+            background-color: hsla(var(--accent), 0.15);
+        }
+
         .attendee-section-label {
             font-size: 0.6875rem;
             font-weight: 600;
@@ -873,20 +888,24 @@
             <div class="announcement-label" id="announcementLabel">Announcements</div>
             <div class="announcement-card" id="announcementCard">
                 <div class="announcement-row">
+                    <div class="announcement-day">Food Guide</div>
+                    <div class="announcement-value"><a href="https://drive.google.com/file/d/1uM83Wtei1FGlyJrZ3RYDK9xMzbskvfHk/view" target="_blank" rel="noopener noreferrer">Check Out</a></div>
+                </div>
+                <div class="announcement-row">
                     <div class="announcement-day">Day 1 IPT</div>
                     <div class="announcement-value">Angeles</div>
                 </div>
                 <div class="announcement-row">
                     <div class="announcement-day">Day 2 IPT</div>
-                    <div class="announcement-value">Room 4, 5, 6</div>
+                    <div class="announcement-value">Room 213, 215, 101, 122</div>
                 </div>
                 <div class="announcement-row">
                     <div class="announcement-day">Day 3 IPT</div>
-                    <div class="announcement-value">Room 7, 8, 9</div>
+                    <div class="announcement-value">Room 218, 213, 118, 121</div>
                 </div>
                 <div class="announcement-row">
                     <div class="announcement-day">Day 4 IPT</div>
-                    <div class="announcement-value">Room 10, 11, 12</div>
+                    <div class="announcement-value">Room 126, 127, All Angeles Bros</div>
                 </div>
             </div>
 
