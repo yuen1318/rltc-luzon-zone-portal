@@ -3,28 +3,28 @@ const CSV_DATA =
 RAYMOND P. DALAY,M,OTHERS,3,,,,,,FALSE
 ZIZETTE NUQUI DALAY,F,OTHERS,3,,,,,,FALSE
 JOVINIA S LUCAS,F,BAGUIO,101,,Track 2 : Participating in worship,Track 2 : Bible Study,,,TRUE
-MARY ANTONETTE B. MIRANDA,F,BATANGAS,101,,Track 3 : Personal Management,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 PAULINE MAE R ROQUID,F,GREENHILLS,101,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 ANDREA COLEEN P. VELASCO,F,QUEZON CITY,101,,Track 3 : Personal Management,Track 1 : Leading worship,,,FALSE
+HONEY CRISRIL M. CALIMOT,F,QUEZON CITY,101,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
 CATHERINE ROSE D. SACANLE,F,BAGUIO,102,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,FALSE
 MARY LOURDES D. BORBON,F,BATANGAS,102,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
 REGINE A. UNGSON,F,DAGUPAN,102,,Track 4 : How to make our branches attractive to younger generation,Track 2 : Bible Study,,,TRUE
 TRIXIA SAM O. BURAGA,F,GREENHILLS,102,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
 MERIE JUDAINE D. CARINGAL,F,BGC,103,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
-FRANCES MARGARET D CHUAHIONG,F,CAVITE,103,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
+FRANCES MARGARET D CHUAHIONG,F,CAVITE,103,,Track 2 : Participating in worship,Track 2 : Bible Study,,,TRUE
 CHARISSE N. SANCHEZ,F,CENTRAL,103,,Track 1 : How to run a ministry,Track 3 : Rekindling Commitment,,,FALSE
-THERESE PAMAN,F,YP LNP,103,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,TRUE
+THERESE PAMAN,F,YP LNP,103,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,FALSE
 ISMINE JOICE S. HIPOLITO,F,ANGELES,104,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 YSABEL PATRICIA M. ZABELLA,F,APNP,104,,Track 4 : How to make our branches attractive to younger generation,Track 4 : How to reach out effectively to Gen Zs,,,TRUE
 GELLAINE A. SALVACION,F,BATANGAS,104,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,FALSE
 MICHELLE ANGELICA C. ARRANZ,F,BGC,104,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,FALSE
 PRECILYN B. CASPILLO,F,BGC,105,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
-JANA MARIE R. REYNALDO,F,MAKATI,105,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,FALSE
+JANA MARIE R. REYNALDO,F,MAKATI,105,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,TRUE
 HANNAH LUZ R. IGNACIO,F,QUEZON CITY,105,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
-CHRISTINE ALEXANDRA S. ALMAZAN,F,YP PAMPANGA - BALE,105,,Track 2 : Participating in worship,Track 1 : Leading worship,,,TRUE
+CHRISTINE ALEXANDRA S. ALMAZAN,F,YP PAMPANGA - BALE,105,,Track 2 : Participating in worship,Track 1 : Leading worship,,,FALSE
 SAMANTHA B. MARWELES,F,BGC,106,,Track 2 : Participating in worship,Track 1 : Leading worship,,,FALSE
-KIRSTEN MELORIE D. CRUZ,F,CABUYAO,106,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,,,TRUE
-JAYCEL C. CAPUNONG,F,CAVITE,106,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,FALSE
+KIRSTEN MELORIE D. CRUZ,F,CABUYAO,106,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
+JAYCEL C. CAPUNONG,F,CAVITE,106,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,TRUE
 JANINE S. VALERIO,F,MAKATI,106,,Track 2 : Participating in worship,Track 3 : Rekindling Commitment,,,FALSE
 KATHY ROSE T. SANTOS,F,ANGELES,107,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,FALSE
 THERESA JOY MAITEM,F,BGC,107,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,,,FALSE
@@ -36,8 +36,8 @@ ARLENE WARKEY PAN,F,CENTRAL,108,,Track 2 : Participating in worship,Track 2 : Bi
 DOMINIQUE T. CRUZ,F,MANILA,108,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
 CAMILLE R. GARCIA,F,ALABANG,109,,Track 2 : Participating in worship,Track 3 : Rekindling Commitment,,,TRUE
 JIANE RHANE A. REGALA,F,ANGELES,109,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
+MARY ANTONETTE B. MIRANDA,F,BATANGAS,109,,Track 3 : Personal Management,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 MEANNE P. ANDES,F,LOS BAÑOS,109,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,,,FALSE
-HONEY CRISRIL M. CALIMOT,F,QUEZON CITY,109,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
 JILLIAN MAE D. GUIAO,F,ANGELES,110,,Track 3 : Personal Management,Track 2 : Bible Study,,,FALSE
 ARIANNE NINA M. AREVALO,F,BGC,110,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,,,TRUE
 REGINE V. GERVACIO,F,DAGUPAN,110,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
@@ -55,7 +55,7 @@ SZABELLA ELISSE M. DE CASA,F,GREENHILLS,113,,Track 4 : How to make our branches 
 BEVERLY GRACE C. ALCAYNO,F,MANILA,113,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,,,TRUE
 MA ANGELICA NICOLE R JACOBA,F,QUEZON CITY,113,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
 KIMBERLY Q. DELA CRUZ,F,ANGELES,114,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,,,FALSE
-ANDREA DES D. TRIA,F,GREENHILLS,114,,Track 2 : Participating in worship,Track 3 : Rekindling Commitment,,,TRUE
+LAILANIE ESPINOZA,F,GREENHILLS,114,,Track 2 : Participating in worship,Track 3 : Rekindling Commitment,,,TRUE
 JARIZA DARYL T. MEJIA,F,MANILA,114,,Track 3 : Personal Management,Track 2 : Bible Study,,,FALSE
 MARIA ANGELICA P. AGBAYANI,F,QUEZON CITY,114,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
 KRISHIA JANINE P. GUBATON,F,ANGELES,115,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,,,FALSE
@@ -71,9 +71,9 @@ PATRICIA DOLORES VICTORIA S RODRIGUEZ,F,CENTRAL,117,,Track 3 : Personal Manageme
 CYRAH MARIAH CONTRERAS,F,MAKATI,117,,Track 2 : Participating in worship,Track 2 : Bible Study,,,TRUE
 MARY BERNADINE C. CALICDAN,F,MANILA,117,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,FALSE
 SHAINA R DUCUT,F,CENTRAL,118,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,FALSE
-LOI ANN DC SALAS,F,MAKATI,118,,Track 4 : How to make our branches attractive to younger generation,Track 2 : Bible Study,,,FALSE
+LOI ANN DC SALAS,F,MAKATI,118,,Track 4 : How to make our branches attractive to younger generation,Track 2 : Bible Study,,,TRUE
 MICHELLE CARLA M. CABUCO,F,QUEZON CITY,118,,Track 4 : How to make our branches attractive to younger generation,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
-EZEKIELA ARCEO LACSAMANA,F,YP PAMPANGA - BALE,118,,Track 1 : How to run a ministry,Track 2 : Bible Study,,,TRUE
+EZEKIELA ARCEO LACSAMANA,F,YP PAMPANGA - BALE,118,,Track 1 : How to run a ministry,Track 2 : Bible Study,,,FALSE
 IRA JAMAICA T. LACO,F,ALABANG,119,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,FALSE
 NICOLE JOYCE V TUPAS,F,CABUYAO,119,,Track 3 : Personal Management,Track 4 : How to reach out effectively to Gen Zs,,,TRUE
 MAYLINDA COMAHIG,F,MAKATI,119,,Track 3 : Personal Management,Track 2 : Bible Study,,,FALSE
@@ -90,8 +90,8 @@ CHRISTIAN VANESSA OLEA AUSTRIA,F,ALABANG,122,,Track 3 : Personal Management,Trac
 ERICA MAE I. MERCADO,F,BATANGAS,122,,Track 4 : How to make our branches attractive to younger generation,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 NIÑA JEAN S. COMANDA,F,MAKATI,122,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,FALSE
 TATYANA MARIE U. GONZAGA,F,QUEZON CITY,122,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
-MIKHAELLA L RACELIS,F,ALABANG,123,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
-DENISE JAMES C CHUA,F,BATANGAS,123,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,,,TRUE
+MIKHAELLA L RACELIS,F,ALABANG,123,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,TRUE
+DENISE JAMES C CHUA,F,BATANGAS,123,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,,,FALSE
 NOIMEE NAVARRO,F,MAKATI,123,,Track 2 : Participating in worship,Track 3 : Rekindling Commitment,,,FALSE
 THERESE GABRIELLE A. SOLA,F,QUEZON CITY,123,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
 OLEEN JOYCE B FLORENDO,F,ALABANG,124,,Track 2 : Participating in worship,Track 3 : Rekindling Commitment,,,FALSE
@@ -116,8 +116,8 @@ DIANNE NICOLE A. PADILLA,F,GREENHILLS,128,,Track 1 : How to run a ministry,Track
 SARAH KAYE GAGNI,F,MAKATI,128,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
 KATHERINE MENDEZ,F,BATANGAS,129,,Track 1 : How to run a ministry,Track 3 : Rekindling Commitment,,,FALSE
 ROLLAINE JOVEL JAMLIG PADDRES,F,CAVITE,129,,Track 4 : How to make our branches attractive to younger generation,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
-JULIA LEONORE D PEREA,F,GREENHILLS,129,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
-GAIL BEATRICE H. VILLAMIEL,F,MAKATI,129,,Track 2 : Participating in worship,Track 1 : Leading worship,,,TRUE
+JULIA LEONORE D PEREA,F,GREENHILLS,129,,Track 2 : Participating in worship,Track 2 : Bible Study,,,TRUE
+GAIL BEATRICE H. VILLAMIEL,F,MAKATI,129,,Track 2 : Participating in worship,Track 1 : Leading worship,,,FALSE
 GLENINE ANNE P PANGILINAN,F,ANGELES,130,,Track 3 : Personal Management,Track 2 : Bible Study,,,FALSE
 LYZETTE A. LAZARTE,F,BATANGAS,130,,Track 3 : Personal Management,Track 2 : Bible Study,,,FALSE
 VEENUZ MARGARETTE C. DEL ROSARIO,F,CAVITE,130,,Track 1 : How to run a ministry,Track 2 : Bible Study,,,TRUE
@@ -138,16 +138,16 @@ MARK ANGEL V. REYES,M,CAVITE,202,,Track 1 : How to run a ministry,Track 4 : How 
 JOSE MARIE GARIN ESPANOL,M,DAGUPAN,202,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 DANIEL GABRIEL R. DE GUZMAN,M,QUEZON CITY,202,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 MARK JASON UMAS-AS CASIL,M,CAVITE,203,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,FALSE
-CHRISTOPHER L. RELATIVO,M,LOS BAÑOS,203,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,TRUE
+CHRISTOPHER L. RELATIVO,M,LOS BAÑOS,203,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,FALSE
 JAYSON C. FRANCO,M,MANILA,203,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
-WALFREDO L. GARCIA II,M,QUEZON CITY,203,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,FALSE
+WALFREDO L. GARCIA II,M,QUEZON CITY,203,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,TRUE
 JUAN FRANCO B DE GUZMAN,M,CABUYAO,204,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,TRUE
 NERICK JOHN A BAYRON,M,GREENHILLS,204,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 JOHN MARK AZURIN ENCINARES,M,LOS BAÑOS,204,,Track 3 : Personal Management,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 DAVID M. SALIM,M,MAKATI,204,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 JON RAY BIEN D. LOGICA,M,ALABANG,205,,Track 4 : How to make our branches attractive to younger generation,Track 2 : Bible Study,,,FALSE
-ELLISON DALE M. RAGUDO,M,BAGUIO,205,,Track 2 : Participating in worship,Track 2 : Bible Study,,,TRUE
-RENZCIV C. QUICIO,M,GREENHILLS,205,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,FALSE
+ELLISON DALE M. RAGUDO,M,BAGUIO,205,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
+RENZCIV C. QUICIO,M,GREENHILLS,205,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,TRUE
 HANS CHRISTIAN ANDERSON A. LABIRAN,M,MAKATI,205,,Track 3 : Personal Management,Track 1 : Leading worship,,,FALSE
 JOSE LORENZO M. CUNANAN,M,ANGELES,206,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 ABRAM CAESAR C. MAAÑO,M,APNP,206,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,TRUE
@@ -157,18 +157,18 @@ JAIME JUROE S BONITO,M,ANGELES,207,,Track 3 : Personal Management,Track 3 : Reki
 RICHARD M. BUHAYO,M,BAGUIO,207,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,FALSE
 ARNEL BIEN H. FRANCISCO,M,BGC,207,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 SEAN VINCENT L. CABEZAS,M,CAVITE,207,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
-JAN MARVIN P. DELA CRUZ,M,ANGELES,208,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,,,TRUE
+JAN MARVIN P. DELA CRUZ,M,ANGELES,208,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 CARLOS V. PALATTAO,M,CENTRAL,208,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,,,FALSE
 VENNICK JAMES B. PARAS,M,GREENHILLS,208,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,FALSE
-DAVID MIGUEL R. DE GUZMAN,M,QUEZON CITY,208,,Track 4 : How to make our branches attractive to younger generation,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
+DAVID MIGUEL R. DE GUZMAN,M,QUEZON CITY,208,,Track 4 : How to make our branches attractive to younger generation,Track 4 : How to reach out effectively to Gen Zs,,,TRUE
 ANGELO V. DEGORIO,M,ALABANG,209,,Track 2 : Participating in worship,Track 1 : Leading worship,,,TRUE
 HENSON B. GLODO,M,CENTRAL,209,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
 JOHN MICHAEL M. DUDAS,M,GREENHILLS,209,,Track 3 : Personal Management,Track 2 : Bible Study,,,FALSE
 JOHN MICHAEL C SERRANO,M,MAKATI,209,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
 AIRAM MIGUEL M. DIZON,M,ANGELES,210,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
-JAN KREINDEL V LOZANO,M,CENTRAL,210,,Track 2 : Participating in worship,Track 2 : Bible Study,,,TRUE
+JAN KREINDEL V LOZANO,M,CENTRAL,210,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
 WILLIE C. FLORES JR.,M,GREENHILLS,210,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
-JUDERICO TANAY,M,MANILA,210,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
+JUDERICO TANAY,M,MANILA,210,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,TRUE
 ANJIL S. AUSTRIA,M,ALABANG,211,,Track 3 : Personal Management,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 JUN EXEQUIEL E. SAYLON,M,ANGELES,211,,Track 1 : How to run a ministry,Track 1 : Leading worship,,,TRUE
 JUSTIN ANTHONY B. BUENAFE,M,BGC,211,,Track 3 : Personal Management,Track 2 : Bible Study,,,FALSE
@@ -186,6 +186,7 @@ MARK SPENCER R. MALIG,M,ANGELES,214,,Track 4 : How to make our branches attracti
 CHRISTIAN M DELA GRACIA,M,CAVITE,214,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,,,TRUE
 VICTOR EMMANUEL F. FUENTES,M,GREENHILLS,214,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,,FALSE
 ALDRINNE M. ARRO,M,ALABANG,215,,Track 3 : Personal Management,Track 2 : Bible Study,,,TRUE
+JEANO ROBERTO D. DELOS REYES,M,ALABANG,215,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
 GIFT FLORENCE NEIL A. JASUL,M,APNP,215,,Track 2 : Participating in worship,Track 2 : Bible Study,,,FALSE
 MERSAN S. CANONIGO JR.,M,MANILA,215,,Track 1 : How to run a ministry,Track 3 : Rekindling Commitment,,,FALSE
 JAN AUDI BLEZ M. NAVARRO,M,ALABANG,216,,Track 2 : Participating in worship,Track 1 : Leading worship,,,FALSE
@@ -193,8 +194,8 @@ MARK JOVEN VILLACARLOS,M,APNP,216,,Track 1 : How to run a ministry,Track 1 : Lea
 MARK DAVID T. DOMINO,M,CABUYAO,216,,Track 1 : How to run a ministry,Track 2 : Bible Study,,,TRUE
 NEIL RYAN NUNEZ,M,MANILA,216,,Track 1 : How to run a ministry,Track 2 : Bible Study,,,FALSE
 JOHN ADRIAN A. CIELOS,M,ALABANG,217,,Track 4 : How to make our branches attractive to younger generation,Track 2 : Bible Study,,,FALSE
-RHOMEL ISAAC B. MARCOJOS,M,BGC,217,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,TRUE
-NOEL E. TEMARIO,M,LOS BAÑOS,217,,Track 2 : Participating in worship,Track 1 : Leading worship,,,FALSE
+RHOMEL ISAAC B. MARCOJOS,M,BGC,217,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
+NOEL E. TEMARIO,M,LOS BAÑOS,217,,Track 2 : Participating in worship,Track 1 : Leading worship,,,TRUE
 ZACH DOMINIC D. JACOB,M,MANILA,217,,Track 1 : How to run a ministry,Track 2 : Bible Study,,,FALSE
 JON SAMUEL S MENDEZ,M,ALABANG,218,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,,,FALSE
 RENZ IVERSON B. MACAGBA,M,BAGUIO,218,,Track 1 : How to run a ministry,Track 3 : Rekindling Commitment,,,TRUE
@@ -214,8 +215,8 @@ JAMINO F. GONZALES,M,CENTRAL,221,,Track 1 : How to run a ministry,Track 4 : How 
 LANCE MATTHEW MIRANDA CALMA,M,QUEZON CITY,221,,Track 2 : Participating in worship,Track 3 : Rekindling Commitment,,,FALSE
 RICHMOND M. BANZUELO,M,ALABANG,222,,Track 2 : Participating in worship,Track 3 : Rekindling Commitment,,,FALSE
 KIM PAULO SIERRA,M,CAVITE,222,,Track 4 : How to make our branches attractive to younger generation,Track 2 : Bible Study,,,FALSE
-MANLEY M. SALAZAR JR.,M,CENTRAL,222,,Track 3 : Personal Management,Track 1 : Leading worship,,,FALSE
-JEREMIAH A. SALVEDIA,M,QUEZON CITY,222,,Track 4 : How to make our branches attractive to younger generation,Track 4 : How to reach out effectively to Gen Zs,,,TRUE
+MANLEY M. SALAZAR JR.,M,CENTRAL,222,,Track 3 : Personal Management,Track 1 : Leading worship,,,TRUE
+JEREMIAH A. SALVEDIA,M,QUEZON CITY,222,,Track 4 : How to make our branches attractive to younger generation,Track 4 : How to reach out effectively to Gen Zs,,,FALSE
 PETER JESS V. LEGASPI,M,OTHERS,223,,,,,,FALSE
 TED TE,M,OTHERS,223,,,,,,FALSE
 JEROME J. ORBE,M,OTHERS,223,,,,,,FALSE
