@@ -1168,6 +1168,29 @@
                 return attendees.filter(a => a.id !== attendee.id && a.room === attendee.room);
             }
 
+            const IPT_SCHEDULE = [
+                { day: 1, rooms: [], branches: ['ANGELES'] },
+                { day: 2, rooms: ['213', '215', '101', '122', '126'], branches: [] },
+                { day: 3, rooms: ['218', '213', '118', '121', '127'], branches: [] },
+                { day: 4, rooms: [], branches: ['ANGELES'] }
+            ];
+
+            function getIptAssignment(attendee) {
+                const room = (attendee.room || '').trim();
+                const branch = (attendee.branch || '').trim().toUpperCase();
+                const days = [];
+                let byRoom = false;
+                IPT_SCHEDULE.forEach(({ day, rooms, branches }) => {
+                    if (room && rooms.includes(room)) {
+                        days.push(day);
+                        byRoom = true;
+                    } else if (branch && branches.includes(branch)) {
+                        days.push(day);
+                    }
+                });
+                return days.length ? { days, byRoom } : null;
+            }
+
             function openDetail(att) {
                 detailName.textContent = att.name;
                 if (detailHeaderRoom) detailHeaderRoom.textContent = att.room ? `Room ${att.room}` : 'Room —';
@@ -1181,7 +1204,25 @@
                     }
                 }
                 if (bglNote) bglNote.style.display = att.bgl === true ? '' : 'none';
-                if (iptNote) iptNote.style.display = (att.name || '').trim().toUpperCase() === 'ANDREA COLEEN P. VELASCO' ? '' : 'none';
+                if (iptNote) {
+                    const ipt = getIptAssignment(att);
+                    const isDee = (att.name || '').trim().toUpperCase() === 'ANDREA COLEEN P. VELASCO';
+                    if (!ipt) {
+                        iptNote.style.display = 'none';
+                    } else {
+                        iptNote.style.display = '';
+                        const iptIntro = iptNote.querySelector('.bgl-role-intro');
+                        if (iptIntro) {
+                            if (isDee) {
+                                iptIntro.textContent = "Hey Dee! Your room's got IPT on Friday. For you, it's optional — join if you can, skip if you don't. No pressure!";
+                            } else {
+                                const dayText = ipt.days.length === 1 ? `Day ${ipt.days[0]}` : `Days ${ipt.days.join(' & ')}`;
+                                const who = ipt.byRoom ? 'Your room' : 'Your branch';
+                                iptIntro.textContent = `${who} is assigned to do IPT on ${dayText} before the morning prayers at the Grand Hall.`;
+                            }
+                        }
+                    }
+                }
                 detailDay1Track.textContent = formatTrack(att.day1Track);
                 detailDay2Track.textContent = formatTrack(att.day2Track);
                 if (eventLabel) eventLabel.textContent = att.gender === 'male' ? 'MOF #' : att.gender === 'female' ? 'BLOOM #' : 'Event #';
