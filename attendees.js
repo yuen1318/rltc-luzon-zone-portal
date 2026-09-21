@@ -129,6 +129,7 @@ ZAIRAH P. AYONAYON,F,MAKATI,131,,Track 2 : Participating in worship,Track 2 : Bi
 J-ZEL A. MAGTIBAY,F,OTHERS,132,,,,,,FALSE
 KRISTEL MAE OLIVEROS,F,OTHERS,132,,,,,,FALSE
 AURORA V LACASTE,F,OTHERS,132,,,,,,FALSE
+PRINCESS SARAH MASABIO,F,OTHERS,132,,,,,,FALSE
 ANGEL S. DEL ROSARIO,M,BATANGAS,201,,Track 3 : Personal Management,Track 1 : Leading worship,,1,TRUE
 AYN CYRIL TIANGCO,M,CAVITE,201,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,,1,FALSE
 RHOMEL IGNATIUS B. MARCOJOS,M,CENTRAL,201,,Track 3 : Personal Management,Track 4 : How to reach out effectively to Gen Zs,,1,FALSE
