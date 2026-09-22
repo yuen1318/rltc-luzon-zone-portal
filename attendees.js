@@ -55,11 +55,11 @@ SZABELLA ELISSE M. DE CASA,F,GREENHILLS,113,,Track 4 : How to make our branches 
 BEVERLY GRACE C. ALCAYNO,F,MANILA,113,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,9,7,TRUE
 MA ANGELICA NICOLE R JACOBA,F,QUEZON CITY,113,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,10,7,FALSE
 KIMBERLY Q. DELA CRUZ,F,ANGELES,114,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,11,1,FALSE
-ANDREA DES D. TRIA,F,GREENHILLS,114,,Track 2 : Participating in worship,Track 3 : Rekindling Commitment,12,1,TRUE
+ANGELICA B. SALAZAR,F,GREENHILLS,114,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,12,1,TRUE
 JARIZA DARYL T. MEJIA,F,MANILA,114,,Track 3 : Personal Management,Track 2 : Bible Study,1,1,FALSE
 MARIA ANGELICA P. AGBAYANI,F,QUEZON CITY,114,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,2,1,FALSE
-KRISHIA JANINE P. GUBATON,F,ANGELES,115,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,3,2,FALSE
 JACQUELINE ESTRELLA PATERES OMAMBAC,F,ALABANG,115,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,4,2,TRUE
+KRISHIA JANINE P. GUBATON,F,ANGELES,115,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,3,2,FALSE
 MICHELLE G. CATUBIG,F,MANILA,115,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,5,2,FALSE
 MARIA SONJA B. DELA CRUZ,F,QUEZON CITY,115,,Track 2 : Participating in worship,Track 2 : Bible Study,6,2,FALSE
 ALLAINE CASTRO GALANG,F,ANGELES,116,,Track 2 : Participating in worship,Track 2 : Bible Study,7,3,FALSE
@@ -97,7 +97,7 @@ THERESE GABRIELLE A. SOLA,F,QUEZON CITY,123,,Track 2 : Participating in worship,
 OLEEN JOYCE B FLORENDO,F,ALABANG,124,,Track 2 : Participating in worship,Track 3 : Rekindling Commitment,3,3,FALSE
 IRINE T. SALES,F,BGC,124,,Track 3 : Personal Management,Track 1 : Leading worship,4,3,TRUE
 PRINCESS ANN L. PAGBILAO,F,CAVITE,124,,Track 4 : How to make our branches attractive to younger generation,Track 4 : How to reach out effectively to Gen Zs,5,3,FALSE
-ANGELICA B. SALAZAR,F,GREENHILLS,124,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,6,3,FALSE
+ANDREA DES D. TRIA,F,GREENHILLS,124,,Track 2 : Participating in worship,Track 3 : Rekindling Commitment,6,3,FALSE
 PAMELA ANN M. DUQUE,F,ALABANG,125,,Track 3 : Personal Management,Track 2 : Bible Study,7,4,FALSE
 REMEDIOS BEATRICE N. GAON,F,CAVITE,125,,Track 1 : How to run a ministry,Track 2 : Bible Study,8,4,FALSE
 ANNA JOY T. QUIRANTE,F,GREENHILLS,125,,Track 3 : Personal Management,Track 2 : Bible Study,9,4,FALSE
@@ -108,22 +108,22 @@ CHRISTINA S. BEDAÑA,F,GREENHILLS,126,,Track 4 : How to make our branches attrac
 GABRIELLE K BELMONTE,F,QUEZON CITY,126,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,2,5,TRUE
 JONESTLE CENA,F,BGC,127,,Track 4 : How to make our branches attractive to younger generation,Track 2 : Bible Study,3,6,FALSE
 CHRISTINE JOY M. ROMILLA,F,CAVITE,127,,Track 1 : How to run a ministry,Track 1 : Leading worship,4,6,FALSE
-ANDREA G. SARONG,F,GREENHILLS,127,,Track 2 : Participating in worship,Track 2 : Bible Study,5,6,TRUE
+MARY ABIGAIL T OTILANO,F,GREENHILLS,127,,Track 1 : How to run a ministry ,Track 2 : Bible Study,5,6,TRUE
 RUBY ROSA V. MANICANI,F,MAKATI,127,,Track 4 : How to make our branches attractive to younger generation,Track 4 : How to reach out effectively to Gen Zs,6,6,FALSE
 JUDY ANNE J PEÑA,F,BATANGAS,128,,Track 1 : How to run a ministry,Track 3 : Rekindling Commitment,7,7,FALSE
 ALAIZA T. ENCARNACION,F,CAVITE,128,,Track 2 : Participating in worship,Track 2 : Bible Study,8,7,TRUE
-DIANNE NICOLE A. PADILLA,F,GREENHILLS,128,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,9,7,FALSE
+JULIA LEONORE D PEREA,F,GREENHILLS,128,,Track 2 : Participating in worship ,Track 2 : Bible Study ,9,7,FALSE
 SARAH KAYE GAGNI,F,MAKATI,128,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,10,7,FALSE
 KATHERINE MENDEZ,F,BATANGAS,129,,Track 1 : How to run a ministry,Track 3 : Rekindling Commitment,11,8,FALSE
 ROLLAINE JOVEL JAMLIG PADDRES,F,CAVITE,129,,Track 4 : How to make our branches attractive to younger generation,Track 4 : How to reach out effectively to Gen Zs,12,8,FALSE
-JULIA LEONORE D PEREA,F,GREENHILLS,129,,Track 2 : Participating in worship,Track 2 : Bible Study,1,8,TRUE
+DIANNE NICOLE A. PADILLA,F,GREENHILLS,129,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,1,8,TRUE
 GAIL BEATRICE H. VILLAMIEL,F,MAKATI,129,,Track 2 : Participating in worship,Track 1 : Leading worship,2,8,FALSE
 GLENINE ANNE P PANGILINAN,F,ANGELES,130,,Track 3 : Personal Management,Track 2 : Bible Study,3,1,FALSE
 LYZETTE A. LAZARTE,F,BATANGAS,130,,Track 3 : Personal Management,Track 2 : Bible Study,4,1,FALSE
 VEENUZ MARGARETTE C. DEL ROSARIO,F,CAVITE,130,,Track 1 : How to run a ministry,Track 2 : Bible Study,5,1,TRUE
 MARIE JONEL CHRISTINE E. REYES,F,GREENHILLS,130,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,6,1,FALSE
 MARICAR D. AUDITOR,F,BGC,131,,Track 2 : Participating in worship,Track 2 : Bible Study,7,2,FALSE
-MARY ABIGAIL T OTILANO,F,GREENHILLS,131,,Track 1 : How to run a ministry,Track 2 : Bible Study,8,2,FALSE
+ANDREA G. SARONG,F,GREENHILLS,131,,Track 2 : Participating in worship,Track 2 : Bible Study,8,2,FALSE
 KENA D. CARBONERA,F,LOS BAÑOS,131,,Track 3 : Personal Management,Track 2 : Bible Study,9,2,TRUE
 ZAIRAH P. AYONAYON,F,MAKATI,131,,Track 2 : Participating in worship,Track 2 : Bible Study,10,2,FALSE
 J-ZEL A. MAGTIBAY,F,OTHERS,132,,,,11,8,FALSE
