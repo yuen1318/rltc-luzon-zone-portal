@@ -59,7 +59,7 @@ ANDREA DES D. TRIA,F,GREENHILLS,114,,Track 2 : Participating in worship,Track 3 
 JARIZA DARYL T. MEJIA,F,MANILA,114,,Track 3 : Personal Management,Track 2 : Bible Study,1,1,FALSE
 MARIA ANGELICA P. AGBAYANI,F,QUEZON CITY,114,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,2,1,FALSE
 KRISHIA JANINE P. GUBATON,F,ANGELES,115,,Track 4 : How to make our branches attractive to younger generation,Track 3 : Rekindling Commitment,3,2,FALSE
-AILEEN MAY B. TOLENTINO,F,CAVITE,115,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,4,2,TRUE
+JACQUELINE ESTRELLA PATERES OMAMBAC,F,ALABANG,115,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,4,2,TRUE
 MICHELLE G. CATUBIG,F,MANILA,115,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,5,2,FALSE
 MARIA SONJA B. DELA CRUZ,F,QUEZON CITY,115,,Track 2 : Participating in worship,Track 2 : Bible Study,6,2,FALSE
 ALLAINE CASTRO GALANG,F,ANGELES,116,,Track 2 : Participating in worship,Track 2 : Bible Study,7,3,FALSE
