@@ -146,7 +146,7 @@ NERICK JOHN A BAYRON,M,GREENHILLS,204,,Track 2 : Participating in worship,Track 
 JOHN MARK AZURIN ENCINARES,M,LOS BAÑOS,204,,Track 3 : Personal Management,Track 4 : How to reach out effectively to Gen Zs,4,2,FALSE
 DAVID M. SALIM,M,MAKATI,204,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,5,2,FALSE
 JON RAY BIEN D. LOGICA,M,ALABANG,205,,Track 4 : How to make our branches attractive to younger generation,Track 2 : Bible Study,6,2,FALSE
-ELLISON DALE M. RAGUDO,M,BAGUIO,205,,Track 2 : Participating in worship,Track 2 : Bible Study,7,2,FALSE
+ELLISON DALE M. RAGUDO,M,BAGUIO,205,,Track 4 : How to make our branches attractive to younger generation,Track 2 : Bible Study,7,2,FALSE
 RENZCIV C. QUICIO,M,GREENHILLS,205,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,8,3,TRUE
 HANS CHRISTIAN ANDERSON A. LABIRAN,M,MAKATI,205,,Track 3 : Personal Management,Track 1 : Leading worship,9,3,FALSE
 JOSE LORENZO M. CUNANAN,M,ANGELES,206,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,10,3,FALSE
@@ -154,7 +154,7 @@ ABRAM CAESAR C. MAAÑO,M,APNP,206,,Track 1 : How to run a ministry,Track 1 : Lea
 ROWELL IAN S. SALVADOR,M,CAVITE,206,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,12,3,FALSE
 JEROME ENRIQUE J. GUSTILO,M,MAKATI,206,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,1,3,FALSE
 JAIME JUROE S BONITO,M,ANGELES,207,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,2,3,TRUE
-RICHARD M. BUHAYO,M,BAGUIO,207,,Track 4 : How to make our branches attractive to younger generation,Track 1 : Leading worship,3,3,FALSE
+RICHARD M. BUHAYO,M,BAGUIO,207,,Track 2 : Participating in worship,Track 1 : Leading worship,3,3,FALSE
 ARNEL BIEN H. FRANCISCO,M,BGC,207,,Track 1 : How to run a ministry,Track 4 : How to reach out effectively to Gen Zs,4,3,FALSE
 SEAN VINCENT L. CABEZAS,M,CAVITE,207,,Track 3 : Personal Management,Track 3 : Rekindling Commitment,5,4,FALSE
 JAN MARVIN P. DELA CRUZ,M,ANGELES,208,,Track 2 : Participating in worship,Track 4 : How to reach out effectively to Gen Zs,6,4,FALSE
