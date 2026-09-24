@@ -1154,11 +1154,19 @@
                 return div.innerHTML;
             }
 
+            const TRACK_VENUES = {
+                1: 'YSABELLA HALL',
+                2: 'GRAND HALL',
+                3: 'SOPHIA HALL',
+                4: 'FRANCESCA HALL'
+            };
+
             function formatTrack(trackValue) {
                 if (!trackValue) return '—';
                 const match = trackValue.match(/Track\s*(\d+)\s*:\s*(.+)/i);
                 if (match) {
-                    return `T${match[1]}: ${match[2]}`;
+                    const venue = TRACK_VENUES[match[1]];
+                    return `T${match[1]}: ${match[2]}${venue ? ` (${venue})` : ''}`;
                 }
                 return trackValue;
             }
